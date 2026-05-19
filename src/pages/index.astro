@@ -171,8 +171,36 @@ import Base from '../layouts/Base.astro';
           </article>
         </div>
 
-      </div>
+        <div class="relative flex gap-6 sm:gap-8">
+          <div class="relative z-10 shrink-0 w-6 flex justify-center pt-6">
+            <div class="w-3 h-3 rounded-full bg-brand ring-2 ring-white shadow-sm"></div>
+          </div>
+          <article class="flex-1 max-w-lg rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+            <div class="p-5 sm:p-6">
+              <svg class="h-10 w-10 text-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+              </svg>
+            </div>
+            <hr class="border-slate-200" />
+            <div class="p-5 sm:p-6 space-y-3">
+              <div class="flex items-center gap-3">
+                <img src="/assets/logos/nvna.png" alt="NVNA Logo" class="h-6 w-auto" />
+                <a
+                  href="https://www.naval-acad.bg/en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-semibold text-slate-900 hover:text-brand transition-colors"
+                >Naval Akademie Nikola Vaptsarov</a>
+              </div>
+              <p class="font-medium text-slate-800">B.Sc. Cybersecurity</p>
+              <p class="text-sm text-slate-500">2020 – 2022 · 2 Jahre</p>
+              <p class="text-sm text-slate-500">Bulgarien</p>
+            </div>
+          </article>
+        </div>
 
+      </div>
     </div>
   </section>
 

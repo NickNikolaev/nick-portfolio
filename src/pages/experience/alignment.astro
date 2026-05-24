@@ -40,5 +40,52 @@ import Base from '../../layouts/Base.astro';
       </div>
     </div>
 
+    <div class="mt-16">
+
+      <div class="flex justify-between overflow-hidden rounded-t-2xl border border-b-0 border-slate-200">
+        <button class="js-star-btn flex-1 px-5 py-3 text-sm font-semibold transition-colors text-slate-900 border-b-2 border-[#0D9488]" data-step="0">Situation</button>
+        <button class="js-star-btn flex-1 px-5 py-3 text-sm font-semibold transition-colors text-slate-500 border-b-2 border-transparent" data-step="1">Aufgabe</button>
+        <button class="js-star-btn flex-1 px-5 py-3 text-sm font-semibold transition-colors text-slate-500 border-b-2 border-transparent" data-step="2">Aktion</button>
+        <button class="js-star-btn flex-1 px-5 py-3 text-sm font-semibold transition-colors text-slate-500 border-b-2 border-transparent" data-step="3">Ergebnis</button>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl border border-slate-200">
+
+        <div class="js-star-panel grid grid-cols-1 sm:grid-cols-2" data-step="0">
+          <img src="/assets/images/alignment-situation.png" alt="Situation" class="h-full min-h-[400px] w-full object-contain sm:border-r sm:border-slate-200" />
+          <div class="p-8">
+            <p class="text-xs font-medium uppercase tracking-widest" style="color:#0D9488">Situation</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-700">Das Vertriebsteam hatte Schwierigkeiten neue Kunden einzuführen und die Alignment.io-Methodologie quartalweise zu verfolgen. Es war auch sehr schwierig die Nutzung unternehmensweit in einem Augenblick zu sehen.</p>
+          </div>
+        </div>
+
+        <div class="js-star-panel hidden grid-cols-1 sm:grid-cols-2" data-step="1">
+          <img src="/assets/images/alignment-task.png" alt="Aufgabe" class="h-full min-h-[400px] w-full object-cover sm:border-r sm:border-slate-200" />
+          <div class="p-8">
+            <p class="text-xs font-medium uppercase tracking-widest" style="color:#0D9488">Aufgabe</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-700">Dashboard arbeitsbereichweit von Figma-Design zu komplettem Feature bauen.</p>
+          </div>
+        </div>
+
+        <div class="js-star-panel hidden grid-cols-1 sm:grid-cols-2" data-step="2">
+          <img src="/assets/images/alignment-aktion.png" alt="Aktion" class="h-full min-h-[400px] w-full object-cover sm:border-r sm:border-slate-200" />
+          <div class="p-8">
+            <p class="text-xs font-medium uppercase tracking-widest" style="color:#0D9488">Aktion</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-700">Meeting mit Gidon um das Backend zu entwickeln → Projekt in Alignment erstellt → V1 bereit für QA → QA + Deploy.</p>
+          </div>
+        </div>
+
+        <div class="js-star-panel hidden grid-cols-1 sm:grid-cols-2" data-step="3">
+          <img src="/assets/images/alignment-ergebnis.png" alt="Ergebnis" class="h-full min-h-[400px] w-full object-cover sm:border-r sm:border-slate-200" />
+          <div class="p-8">
+            <p class="text-xs font-medium uppercase tracking-widest" style="color:#0D9488">Ergebnis</p>
+            <p class="mt-4 text-3xl font-extrabold text-slate-900">Verdopplung der Onboarding-Effizienz</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </section>
+  <script src="../../scripts/alignment.js"></script>
 </Base>

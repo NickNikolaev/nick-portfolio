@@ -34,8 +34,6 @@ const is_nav_link_active = (href: string) => {
 
         <div class="js-nav-desktop-experience-dropdown-menu absolute -left-2 top-full hidden min-w-[180px] rounded-lg border border-slate-100 bg-white shadow-md py-1">
           <a href="/experience/alignment" class:list={["block px-4 py-2 text-sm transition hover:bg-slate-50 hover:text-brand", is_nav_link_active('/experience/alignment') ? "text-brand" : "text-slate-700"]}>Alignment</a>
-          <a href="/experience/thedatagroup" class:list={["block px-4 py-2 text-sm transition hover:bg-slate-50 hover:text-brand", is_nav_link_active('/experience/thedatagroup') ? "text-brand" : "text-slate-700"]}>TheDataGroup</a>
-          <a href="/experience/hazemag" class:list={["block px-4 py-2 text-sm transition hover:bg-slate-50 hover:text-brand", is_nav_link_active('/experience/hazemag') ? "text-brand" : "text-slate-700"]}>Hazemag</a>
         </div>
       </div>
 
@@ -65,8 +63,6 @@ const is_nav_link_active = (href: string) => {
       </button>
       <div class="hidden pl-4 js-mobile-dropdown-menu">
         <a href="/experience/alignment" class:list={["block py-2 text-sm transition hover:text-brand", is_nav_link_active('/experience/alignment') ? "text-brand" : "text-slate-600"]}>Alignment.io</a>
-        <a href="/experience/thedatagroup" class:list={["block py-2 text-sm transition hover:text-brand", is_nav_link_active('/experience/thedatagroup') ? "text-brand" : "text-slate-600"]}>TheDataGroup</a>
-        <a href="/experience/hazemag" class:list={["block py-2 text-sm transition hover:text-brand", is_nav_link_active('/experience/hazemag') ? "text-brand" : "text-slate-600"]}>Hazemag</a>
       </div>
     </div>
 

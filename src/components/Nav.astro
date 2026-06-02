@@ -2,26 +2,36 @@
 const pathname = Astro.url.pathname;
 const is_nav_link_active = (href: string) => {
   if ( href === '/' ) return pathname === '/'; // Without this, "/" would match every route.
-  return pathname === href        // Exact match, e.g. /feedback
-      || pathname.startsWith(href + '/'); // Marks parent active when on a child route, e.g. /experience/alignment → /experience
+
+  return pathname === href || pathname.startsWith(href + '/');
 };
+
+const links = [
+  { href: '/',          key: 'nav.intro',    label: 'Intro' },
+  { href: '/#erfahrung',key: 'nav.exp',      label: 'Erfahrung' },
+  { href: '/#auswirkungen', key: 'nav.impact', label: 'Auswirkungen' },
+  { href: '/#faq',      key: 'nav.faq',      label: 'FAQ' },
+  { href: '/feedback',  key: 'nav.feedback', label: 'Rückmeldung' },
+];
 ---
 
-<header class="sticky top-0 z-10 border-b border-slate-100 bg-white/80 backdrop-blur">
-  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-    <span class="text-base font-semibold tracking-tight text-slate-900">
-      Nick Nikolaev
+<header class="sticky top-0 z-30 border-b border-slate-100 bg-white/80 backdrop-blur">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
+    <!-- Language toggle (replaces wordmark) -->
+    <span class="inline-flex overflow-hidden rounded-lg border border-slate-200" id="lang-toggle">
+      <button type="button" data-lang="de" class="js-lang px-3 py-1.5 font-mono text-xs font-bold tracking-wide text-slate-500 transition data-[active]:bg-brand data-[active]:text-white" data-active>DE</button>
+      <button type="button" data-lang="en" class="js-lang px-3 py-1.5 font-mono text-xs font-bold tracking-wide text-slate-500 transition data-[active]:bg-brand data-[active]:text-white">EN</button>
     </span>
 
-    <!-- Nav visible only on desktop -->
-    <div class="js-nav-desktop-menu max-md:hidden flex items-center self-stretch gap-6 text-sm font-medium text-slate-600">
-      <a href="/" class:list={["transition hover:text-brand", is_nav_link_active('/') && "text-brand"]}>
-        Home
-      </a>
-
-      <a href="/feedback" class:list={["transition hover:text-brand", is_nav_link_active('/feedback') && "text-brand"]}>
-        Rückmeldung
-      </a>
+    <!-- Desktop nav -->
+    <div class="js-nav-desktop-menu max-md:hidden flex items-center gap-6 text-sm font-medium text-slate-600">
+      {links.map((l) => (
+          <a
+              href={l.href}
+              data-i18n={l.key}
+              class:list={["transition hover:text-brand", is_nav_link_active(l.href) && "text-brand"]}
+          >{l.label}</a>
+      ))}
     </div>
 
     <!-- Hamburger (mobile-only) -->
@@ -34,9 +44,13 @@ const is_nav_link_active = (href: string) => {
 
   <!-- Mobile Menu -->
   <div class="js-mobile-menu hidden md:hidden border-t border-slate-100 bg-white px-6 pb-4">
-    <a href="/" class:list={["block py-2.5 text-sm font-medium transition hover:text-brand", is_nav_link_active('/') ? "text-brand" : "text-slate-700"]}>Home</a>
-
-    <a href="/feedback" class:list={["block py-2.5 text-sm font-medium transition hover:text-brand", is_nav_link_active('/feedback') ? "text-brand" : "text-slate-700"]}>Rückmeldung</a>
+    {links.map((l) => (
+        <a
+            href={l.href}
+            data-i18n={l.key}
+            class:list={["block py-2.5 text-sm font-medium transition hover:text-brand", is_nav_link_active(l.href) ? "text-brand" : "text-slate-700"]}
+        >{l.label}</a>
+    ))}
   </div>
 </header>
 

@@ -1,13 +1,13 @@
 ---
 const pathname = Astro.url.pathname;
 const is_nav_link_active = (href: string) => {
-  if ( href === '/' ) return pathname === '/'; // Without this, "/" would match every route.
+  if ( href === '/' || href === '/#intro' ) return pathname === '/'; // Without this, "/" would match every route.
 
   return pathname === href || pathname.startsWith(href + '/');
 };
 
 const links = [
-  { href: '/',          key: 'nav.intro',    label: 'Intro' },
+  { href: '/#intro',          key: 'nav.intro',    label: 'Intro' },
   { href: '/#experience', key: 'nav.exp',      label: 'Erfahrung' },
   { href: '/#auswirkungen', key: 'nav.impact', label: 'Auswirkungen' },
   { href: '/#faq',      key: 'nav.faq',      label: 'FAQ' },

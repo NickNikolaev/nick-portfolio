@@ -1,11 +1,4 @@
 ---
-const pathname = Astro.url.pathname;
-const is_nav_link_active = (href: string) => {
-  if ( href === '/' || href === '/#intro' ) return pathname === '/'; // Without this, "/" would match every route.
-
-  return pathname === href || pathname.startsWith(href + '/');
-};
-
 const links = [
   { href: '/#intro',          key: 'nav.intro',    label: 'Intro' },
   { href: '/#experience', key: 'nav.exp',      label: 'Erfahrung' },
@@ -25,11 +18,11 @@ const links = [
 
     <!-- Desktop nav -->
     <div class="js-nav-desktop-menu max-md:hidden flex items-center gap-6 text-sm font-medium text-slate-600">
-      {links.map((l) => (
+      { links.map((l) => (
           <a
               href={l.href}
               data-i18n={l.key}
-              class:list={["transition hover:text-brand", is_nav_link_active(l.href) && "text-brand"]}
+              class="transition hover:text-brand"
           >{l.label}</a>
       ))}
     </div>
@@ -48,7 +41,7 @@ const links = [
         <a
             href={l.href}
             data-i18n={l.key}
-            class:list={["block py-2.5 text-sm font-medium transition hover:text-brand", is_nav_link_active(l.href) ? "text-brand" : "text-slate-700"]}
+            class="block py-2.5 text-sm font-medium text-slate-700 transition hover:text-brand"
         >{l.label}</a>
     ))}
   </div>

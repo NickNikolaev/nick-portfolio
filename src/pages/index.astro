@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Experience from '../components/Experience.astro';
+import Faq from '../components/Faq.astro';
 ---
 
 <Base>
@@ -9,103 +10,7 @@ import Experience from '../components/Experience.astro';
 
   <Experience />
 
-  <section class="mx-auto max-w-3xl px-6 py-20">
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-      FAQ
-    </h2>
-
-    <div class="mt-12 divide-y divide-slate-200 border-t border-b border-slate-200">
-      <div>
-        <button
-          type="button"
-          aria-expanded="false"
-          class="js-faq-trigger group peer flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-slate-900 transition hover:text-brand"
-        >
-          <span>Wann kannst du anfangen?</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div class="grid grid-rows-[0fr] peer-aria-expanded:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-          <div class="overflow-hidden">
-            <p class="pb-5 text-sm leading-relaxed text-slate-600">Sofort verfügbar.</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          aria-expanded="false"
-          class="js-faq-trigger group peer flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-slate-900 transition hover:text-brand"
-        >
-          <span>Remote oder vor Ort?</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div class="grid grid-rows-[0fr] peer-aria-expanded:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-          <div class="overflow-hidden">
-            <p class="pb-5 text-sm leading-relaxed text-slate-600">Vor Ort — deutschsprachige Schweiz. Umzug möglich.</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          aria-expanded="false"
-          class="js-faq-trigger group peer flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-slate-900 transition hover:text-brand"
-        >
-          <span>Festanstellung oder Freelance?</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div class="grid grid-rows-[0fr] peer-aria-expanded:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-          <div class="overflow-hidden">
-            <p class="pb-5 text-sm leading-relaxed text-slate-600">Nur Festanstellung.</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          aria-expanded="false"
-          class="js-faq-trigger group peer flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-slate-900 transition hover:text-brand"
-        >
-          <span>Arbeitsberechtigung in der Schweiz?</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div class="grid grid-rows-[0fr] peer-aria-expanded:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-          <div class="overflow-hidden">
-            <p class="pb-5 text-sm leading-relaxed text-slate-600">EU-Pass — vollständig arbeitsberechtigt in der Schweiz. Kein Sponsoring nötig.</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          aria-expanded="false"
-          class="js-faq-trigger group peer flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-slate-900 transition hover:text-brand"
-        >
-          <span>Benutzt du KI-gestützte Tools beim Entwickeln?</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-        <div class="grid grid-rows-[0fr] peer-aria-expanded:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-          <div class="overflow-hidden">
-            <p class="pb-5 text-sm leading-relaxed text-slate-600">Ja — ich arbeite mit Cursor und Claude Code für schnellere Entwicklung.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Faq />
 
   <section class="py-24 md:py-32">
     <div class="max-w-2xl mx-auto px-6">

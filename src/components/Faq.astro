@@ -102,8 +102,15 @@
 <script>
   document.querySelectorAll('.js-faq-trigger').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
+      const question_was_open = btn.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll('.js-faq-trigger').forEach((trigger) => {
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+
+      if ( ! question_was_open ) {
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 </script>

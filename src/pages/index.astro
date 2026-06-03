@@ -1,89 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
 ---
 
 <Base>
   <Hero />
 
-  <section class="mx-auto max-w-3xl px-6 py-20">
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-      Erfahrung
-    </h2>
-
-    <div class="relative mt-12">
-      <div class="absolute left-3 top-0 bottom-0 border-l-2 border-slate-200"></div>
-
-      <div class="space-y-10 sm:space-y-14">
-
-        <div class="relative flex gap-6 sm:gap-8">
-          <div class="relative z-10 shrink-0 w-6 flex justify-center pt-6">
-            <div class="w-3 h-3 rounded-full bg-brand ring-2 ring-white shadow-sm"></div>
-          </div>
-          <article class="flex-1 max-w-lg rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
-            <img
-              src="/assets/images/alignment.png"
-              alt="Alignment.io Screenshot"
-              class="w-full h-48 sm:h-56 object-cover rounded-t-2xl"
-            />
-            <hr class="border-slate-200" />
-            <div class="p-5 sm:p-6 space-y-3">
-              <div class="flex items-center gap-3">
-                <img src="/assets/logos/alignment.png" alt="Alignment.io Logo" class="h-6 w-auto" />
-                <a
-                  href="https://alignment.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-semibold text-slate-900 hover:text-brand transition-colors"
-                >Alignment.io</a>
-              </div>
-              <p class="text-sm text-slate-500">KI-SaaS Plattform für Unternehmensstrategie & OKRs</p>
-              <p class="font-medium text-slate-800">Gründungsingenieur</p>
-              <p class="text-sm text-slate-500">2022 – 2026 · 3 Jahre 3 Monate</p>
-              <p class="text-sm text-slate-500">Remote · StartX, Kalifornien, USA</p>
-            </div>
-          </article>
-        </div>
-
-        <div class="relative flex gap-6 sm:gap-8">
-          <div class="relative z-10 shrink-0 w-6 flex justify-center pt-6">
-            <div class="w-3 h-3 rounded-full bg-brand ring-2 ring-white shadow-sm"></div>
-          </div>
-          <article class="flex-1 max-w-lg rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
-            <img
-                src="/assets/images/nanv.jpg"
-                alt="Naval Akademie Nikola Vaptsarov Screenshot"
-                class="w-full h-48 sm:h-56 object-cover rounded-t-2xl"
-            />
-            <hr class="border-slate-200" />
-            <div class="p-5 sm:p-6 space-y-3">
-              <div class="flex items-center gap-3">
-                <img src="/assets/logos/nvna.png" alt="NVNA Logo" class="h-6 w-auto" />
-                <a
-                  href="https://www.naval-acad.bg/en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-semibold text-slate-900 hover:text-brand transition-colors"
-                >Naval Akademie Nikola Vaptsarov</a>
-              </div>
-              <p class="font-medium text-slate-800">B.Sc. Cybersecurity</p>
-              <p class="text-sm text-slate-500">2020 – 2022 · 2 Jahre</p>
-              <p class="text-sm text-slate-500">Bulgarien</p>
-              <a
-                href="/assets/files/nanv-transcript-de.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
-              >
-                Transcript ansehen ↗
-              </a>
-            </div>
-          </article>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  <Experience />
 
   <section class="mx-auto max-w-3xl px-6 py-20">
     <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">

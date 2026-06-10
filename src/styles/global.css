@@ -11,6 +11,7 @@
   --animate-bob: bob 1.7s ease-in-out infinite;
   --animate-grid-drift: grid-drift 7s linear infinite;
   --animate-marquee: marquee 26s linear infinite;
+  --animate-aurora: aurora 10s linear infinite alternate;
 
   @keyframes blob {
     0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; transform: translateY(-50%) rotate(0) scale(1); }
@@ -21,4 +22,8 @@
   @keyframes caret { 50% { opacity: 0; } }
   @keyframes bob   { 50% { transform: translateY(4px); } }
   @keyframes marquee { to { transform: translateX(-50%); } }
+  @keyframes aurora {
+    from { background-position: 0% 50%; }
+    to   { background-position: 100% 50%; }
+  }
 }

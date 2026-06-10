@@ -1,0 +1,124 @@
+---
+
+interface WorkItem {
+  title: string;
+  text: string;
+  kind: 'feature' | 'process';
+  image: string;
+  alt: string;
+}
+
+interface Tech {
+  label: string;
+  logo: string;
+}
+
+const features: WorkItem[] = [
+  {
+    title: 'Dashboard',
+    kind: 'feature',
+    image: '/assets/images/work/dashboard.png',
+    alt: 'Alignment.io Dashboard',
+    text: 'Dashboard-Arbeitsbereich workspace-wide von Figma-Design bis zum fertigen Feature — für vierteljähriges Alignment-Tracking.',
+  },
+  {
+    title: 'Authentifizierung',
+    kind: 'feature',
+    image: '/assets/images/work/authentication.png',
+    alt: 'Alignment.io — Authentication',
+    text: 'Authentifizierungs-Flows umgesetzt: SAML SSO, Google OAuth und Apple OAuth.',
+  },
+  {
+    title: 'RBAC',
+    kind: 'feature',
+    image: '/assets/images/work/rbac.png',
+    alt: 'Alignment.io — RBAC',
+    text: 'Zugriffssteuerung workspace-wide, team-wide und project-wide.',
+  },
+  {
+    title: 'Suche',
+    kind: 'feature',
+    image: '/assets/images/work/search.png',
+    alt: 'Alignment.io — Search',
+    text: 'Globale Suche powered by ElasticSearch für alle Nachrichten, Items und Projekte.',
+  },
+  {
+    title: 'Release-Verwaltung',
+    kind: 'process',
+    image: '/assets/images/work/kanban.png',
+    alt: 'Alignment.io — Kanban Board',
+    text: 'QA- und Release-Prozesse; 5-köpfiges Team in einem Agile-Umfeld geleitet.',
+  },
+  {
+    title: 'KI-Chat-System',
+    kind: 'feature',
+    image: '/assets/images/work/chat.png',
+    alt: 'Alignment.io — Chat',
+    text: 'Plattformweite sichere Zusammenarbeit — Echtzeit-AI-Chat-System entwickelt; Entwicklung einer Mobile-App unterstützt und koordiniert.',
+  },
+];
+
+const techStack: Tech[] = [
+  { label: 'Node.js',    logo: '/assets/logos/tech/nodejs.svg' },
+  { label: 'MySQL',      logo: '/assets/logos/tech/mysql.svg' },
+  { label: 'AWS',        logo: '/assets/logos/tech/aws.svg' },
+  { label: 'Git',        logo: '/assets/logos/tech/git.svg' },
+  { label: 'Docker',     logo: '/assets/logos/tech/docker.svg' },
+  { label: 'JavaScript', logo: '/assets/logos/tech/javascript.svg' },
+  { label: 'HTML',       logo: '/assets/logos/tech/html.svg' },
+  { label: 'CSS',        logo: '/assets/logos/tech/css.svg' },
+  { label: 'Tailwind',   logo: '/assets/logos/tech/tailwind.svg' },
+];
+---
+
+<section id="work" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
+  <!-- Header -->
+  <div class="flex flex-col gap-3">
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">03 — Arbeit</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Mini Arbeit bei Alignment.io</h2>
+    <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
+      Konkrete Features und Prozesse, die ich entwickelt habe.
+    </p>
+  </div>
+
+  <!-- Feature-Karten -->
+  <div class="mt-14 flex flex-col gap-10">
+    {features.map((f, i) => (
+      <article class="flex flex-col gap-6 rounded-2xl border border-slate-200 p-6 transition-shadow duration-200 hover:shadow-md sm:flex-row">
+        <img
+          src={f.image}
+          alt={f.alt}
+          class="h-44 w-full shrink-0 rounded-xl object-cover ring-1 ring-slate-200/60 sm:h-40 sm:w-60"
+        />
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="font-mono text-xs text-slate-400">{String(i + 1).padStart(2, '0')}</span>
+            <span class:list={[
+              'rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide',
+              f.kind === 'process'
+                ? 'bg-slate-100 text-slate-500'
+                : 'bg-brand/10 text-brand',
+            ]}>
+              {f.kind === 'process' ? 'Prozess' : 'Feature'}
+            </span>
+          </div>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">{f.title}</h3>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-slate-500">{f.text}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Tech-Stack · Logo-Leiste (dezent, Hover = volle Brand-Farbe) -->
+  <div class="mt-16 border-t border-slate-200 pt-8">
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">Tech Stack</p>
+    <ul class="mt-5 flex flex-wrap gap-2.5">
+      {techStack.map((t) => (
+        <li class="group flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 opacity-70 transition hover:border-brand/30 hover:opacity-100">
+          <img src={t.logo} alt="" class="h-6 w-6 object-contain grayscale transition group-hover:grayscale-0" />
+          <span class="font-mono text-sm text-slate-700">{t.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

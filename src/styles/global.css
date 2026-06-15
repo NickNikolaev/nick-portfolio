@@ -26,4 +26,11 @@
     from { background-position: 0% 50%; }
     to   { background-position: 100% 50%; }
   }
+  @keyframes ai-term-roll {
+    to { transform: translateY(-50%); }
+  }
+}
+
+@keyframes ai-confetti {
+  to { transform: translate(var(--cx), var(--cy)) scale(1); opacity: 0; }
 }

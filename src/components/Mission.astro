@@ -1,0 +1,296 @@
+---
+---
+
+<section id="mission" class="mission relative isolate flex justify-center overflow-hidden border-t border-white/10 bg-brand">
+  <canvas id="mission-shader" class="pointer-events-none absolute inset-0 z-0 block h-full w-full" aria-hidden="true"></canvas>
+
+  <!-- Dezänti Vignette für Text-Fokus -->
+  <div class="pointer-events-none absolute inset-0 z-[1] mission__veil"></div>
+
+  <div id="mission-content" class="mission__card pointer-events-none relative z-[2] flex w-full max-w-[44rem] flex-col items-center text-center">
+    <span class="reveal reveal--up d-0 whitespace-nowrap font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/50">07 — Mission</span>
+    <p class="reveal reveal--up d-0 mt-3 text-[0.95rem] leading-relaxed text-white/70">Warum habe ich dieses Portfolio aufgebaut.</p>
+
+    <div class="reveal reveal--line d-150 my-8 h-px w-12 origin-left bg-white/20"></div>
+
+    <p class="reveal reveal--stmt d-250 mission__statement font-sans font-light text-white/95 text-balance">
+      Hilf Schweizer Early-Stage-Startups dabei, meine Eignung als Softwareentwickler
+      mithilfe eines KI-gestützten Portfolios einzuschätzen.
+    </p>
+
+    <span class="reveal reveal--pop d-420 mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.16em] text-white/60">
+      <span class="text-[1.05em] leading-none">🇨🇭</span>
+      Schweizer Early-Stage-Startups
+    </span>
+  </div>
+</section>
+
+<style>
+  /* ---- Iterationspunkt-Knobs ---- */
+  .mission {
+    --shader-opacity: 1;
+    --card-tint: 0.34;
+    --card-blur: 14px;
+    padding-block: clamp(7rem, 5rem + 8vw, 9rem); /* py-28 → md:py-36 */
+    padding-inline: 1.5rem;
+    cursor: crosshair;
+  }
+
+  #mission-shader { opacity: var(--shader-opacity); }
+
+  .mission__veil {
+    background: radial-gradient(
+      ellipse 75% 60% at 50% 50%,
+      rgba(1, 36, 35, 0.35) 0%,
+      rgba(1, 36, 35, 0) 55%
+    );
+  }
+
+  /* ---- Frosted-Glass-Charte ---- */
+  .mission__card {
+    padding: clamp(2.5rem, 1.5rem + 3vw, 4rem) clamp(2rem, 1rem + 4vw, 4.5rem);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(1, 36, 35, var(--card-tint));
+    -webkit-backdrop-filter: blur(var(--card-blur)) saturate(120%);
+    backdrop-filter: blur(var(--card-blur)) saturate(120%);
+    box-shadow:
+      0 24px 60px -20px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .mission__statement {
+    font-size: clamp(1.875rem, 1.1rem + 3.4vw, 3rem); /* text-3xl → lg:text-5xl */
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    max-width: 40rem;
+  }
+
+  /* ---- Scroll-Reveal ---- */
+  .reveal {
+    opacity: 0;
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal--up   { transform: translateY(12px); }
+  .reveal--stmt { transform: translateY(20px); }
+  .reveal--line { transform: scaleX(0); }
+  .reveal--pop  { transform: scale(0.92); }
+
+  .is-visible .reveal { opacity: 1; transform: none; }
+  .is-visible .d-0   { transition-delay: 0ms; }
+  .is-visible .d-150 { transition-delay: 150ms; }
+  .is-visible .d-250 { transition-delay: 250ms; }
+  .is-visible .d-420 { transition-delay: 420ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition-duration: 0s !important; transition-delay: 0s !important; }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('mission') as HTMLElement;
+  const content = document.getElementById('mission-content') as HTMLElement;
+  const canvas  = document.getElementById('mission-shader') as HTMLCanvasElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Scroll-Reveal (IntersectionObserver + Safety-Fallback) ---- */
+  let revealed = false;
+  const reveal = () => {
+    if (revealed) return;
+    revealed = true;
+    content.classList.add('is-visible');
+  };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { reveal(); io.unobserve(e.target); } });
+    }, { threshold: 0.25 });
+    io.observe(content);
+    setTimeout(reveal, 600); // garantiert de End-Zueschtand au wenn IO nöd feuert
+  } else {
+    reveal();
+  }
+
+  /* ---- WebGL «Fluid Noise» Shader ---- */
+  const gl = (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
+  if (gl) {
+    const VERT = `
+      attribute vec2 aPos;
+      void main() { gl_Position = vec4(aPos, 0.0, 1.0); }
+    `;
+    const FRAG = `
+      precision highp float;
+      uniform vec2  uResolution;
+      uniform float uTime;
+      uniform vec2  uMouse;
+      uniform vec2  uClick;
+      uniform float uClickTime;
+
+      const vec3 BRAND      = vec3(0.0078, 0.4039, 0.4000); // #026766
+      const vec3 BRAND_DARK = vec3(0.0039, 0.3255, 0.3216); // #015352
+      const vec3 DEEP       = vec3(0.0039, 0.2941, 0.2902); // #014b4a
+      const vec3 GLOW       = vec3(0.1098, 0.8039, 0.7255); // #1ccdb9
+
+      vec3 mod289(vec3 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
+      vec2 mod289(vec2 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
+      vec3 permute(vec3 x){ return mod289(((x*34.0)+1.0)*x); }
+      float snoise(vec2 v){
+        const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                           -0.577350269189626, 0.024390243902439);
+        vec2 i  = floor(v + dot(v, C.yy));
+        vec2 x0 = v - i + dot(i, C.xx);
+        vec2 i1 = (x0.x > x0.y) ? vec2(1.0,0.0) : vec2(0.0,1.0);
+        vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1;
+        i = mod289(i);
+        vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0))
+                                 + i.x + vec3(0.0, i1.x, 1.0));
+        vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+        m = m*m; m = m*m;
+        vec3 x = 2.0 * fract(p * C.www) - 1.0;
+        vec3 h = abs(x) - 0.5;
+        vec3 ox = floor(x + 0.5);
+        vec3 a0 = x - ox;
+        m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+        vec3 g;
+        g.x  = a0.x  * x0.x  + h.x  * x0.y;
+        g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+        return 130.0 * dot(m, g);
+      }
+      float fbm(vec2 p){
+        float v = 0.0, a = 0.5;
+        for (int i = 0; i < 5; i++){ v += a * snoise(p); p *= 2.0; a *= 0.5; }
+        return v;
+      }
+
+      void main(){
+        vec2 uv = gl_FragCoord.xy / uResolution.xy;
+        float aspect = uResolution.x / uResolution.y;
+        vec2 p = uv; p.x *= aspect;
+        vec2 m = uMouse; m.x *= aspect;
+
+        vec2 toMouse = m - p;
+        float md = length(toMouse);
+        float pull = exp(-md * 2.2) * 0.35;
+        vec2 warp = p + normalize(toMouse + 0.0001) * pull;
+
+        float t = uTime * 0.08;
+        float n = fbm(warp * 2.2 + vec2(t, -t * 0.7));
+        n += 0.5 * fbm(warp * 4.5 - vec2(t * 1.3, t));
+        n = n * 0.5 + 0.5;
+
+        vec2 c = uClick; c.x *= aspect;
+        float cd = length(p - c);
+        float age = uTime - uClickTime;
+        float ripple = 0.0;
+        if (age >= 0.0 && age < 2.0) {
+          float wave = sin(cd * 22.0 - age * 9.0);
+          float ring = smoothstep(0.55, 0.0, abs(cd - age * 0.6));
+          float decay = 1.0 - age / 2.0;
+          ripple = wave * ring * decay * 0.6;
+        }
+        n = clamp(n + ripple, 0.0, 1.0);
+
+        vec3 col = mix(DEEP, BRAND_DARK, smoothstep(0.0, 0.45, n));
+        col = mix(col, BRAND, smoothstep(0.35, 0.7, n));
+        col = mix(col, GLOW, smoothstep(0.78, 1.0, n));
+        col += GLOW * pull * 0.6;
+        col += GLOW * max(ripple, 0.0) * 0.8;
+        float spec = smoothstep(0.92, 1.0, n);
+        col += vec3(spec) * 0.12;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    const compile = (type: number, src: string) => {
+      const s = gl.createShader(type)!;
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); return null; }
+      return s;
+    };
+    const vs = compile(gl.VERTEX_SHADER, VERT);
+    const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+
+    if (vs && fs) {
+      const prog = gl.createProgram()!;
+      gl.attachShader(prog, vs); gl.attachShader(prog, fs);
+      gl.linkProgram(prog); gl.useProgram(prog);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, 'aPos');
+      gl.enableVertexAttribArray(aPos);
+      gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+      const uRes = gl.getUniformLocation(prog, 'uResolution');
+      const uTime = gl.getUniformLocation(prog, 'uTime');
+      const uMouse = gl.getUniformLocation(prog, 'uMouse');
+      const uClick = gl.getUniformLocation(prog, 'uClick');
+      const uClickTime = gl.getUniformLocation(prog, 'uClickTime');
+
+      let mouse = [-5, -5], mouseTarget = [-5, -5], firstMove = true;
+      let click = [0.5, 0.5], clickTime = -10;
+      const startTime = performance.now();
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const resize = () => {
+        const w = section.clientWidth, h = section.clientHeight;
+        canvas.width = Math.max(1, Math.floor(w * dpr));
+        canvas.height = Math.max(1, Math.floor(h * dpr));
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      };
+      if ('ResizeObserver' in window) new ResizeObserver(resize).observe(section);
+      else window.addEventListener('resize', resize);
+      resize();
+
+      section.addEventListener('pointermove', (e) => {
+        const r = section.getBoundingClientRect();
+        mouseTarget = [(e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height];
+        if (firstMove) { mouse = mouseTarget.slice(); firstMove = false; }
+      });
+      section.addEventListener('pointerdown', (e) => {
+        const r = section.getBoundingClientRect();
+        click = [(e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height];
+        clickTime = (performance.now() - startTime) / 1000;
+      });
+
+      let rafId: number | null = null;
+      const render = () => {
+        const time = (performance.now() - startTime) / 1000;
+        mouse[0] += (mouseTarget[0] - mouse[0]) * 0.06;
+        mouse[1] += (mouseTarget[1] - mouse[1]) * 0.06;
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, time);
+        gl.uniform2f(uMouse, mouse[0], mouse[1]);
+        gl.uniform2f(uClick, click[0], click[1]);
+        gl.uniform1f(uClickTime, clickTime);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        rafId = requestAnimationFrame(render);
+      };
+
+      if (reduceMotion) {
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, 0);
+        gl.uniform2f(uMouse, -5, -5);
+        gl.uniform2f(uClick, 0.5, 0.5);
+        gl.uniform1f(uClickTime, -10);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+      } else {
+        render();
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver((ents) => {
+            ents.forEach((en) => {
+              if (en.isIntersecting && rafId === null) render();
+              else if (!en.isIntersecting && rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+            });
+          }, { threshold: 0 }).observe(section);
+        }
+      }
+    } else {
+      canvas.style.display = 'none'; // Fallback: nur bg-brand
+    }
+  } else {
+    canvas.style.display = 'none'; // Fallback: nur bg-brand (#026766)
+  }
+</script>

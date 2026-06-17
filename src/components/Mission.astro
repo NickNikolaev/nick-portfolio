@@ -1,4 +1,12 @@
 ---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+const t = translation.mission;
 ---
 
 <section id="mission" class="mission relative isolate flex justify-center overflow-hidden border-t border-white/10 bg-brand">
@@ -8,19 +16,18 @@
   <div class="pointer-events-none absolute inset-0 z-[1] mission__veil"></div>
 
   <div id="mission-content" class="mission__card pointer-events-none relative z-[2] flex w-full max-w-[44rem] flex-col items-center text-center">
-    <span class="reveal reveal--up d-0 whitespace-nowrap font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/50">07 — Mission</span>
-    <p class="reveal reveal--up d-0 mt-3 text-[0.95rem] leading-relaxed text-white/70">Warum habe ich dieses Portfolio aufgebaut.</p>
+    <span class="reveal reveal--up d-0 whitespace-nowrap font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/50">{t.label}</span>
+    <p class="reveal reveal--up d-0 mt-3 text-[0.95rem] leading-relaxed text-white/70">{t.subtitle}</p>
 
     <div class="reveal reveal--line d-150 my-8 h-px w-12 origin-left bg-white/20"></div>
 
     <p class="reveal reveal--stmt d-250 mission__statement font-sans font-light text-white/95 text-balance">
-      Hilf Schweizer Startups dabei, meine Eignung als Softwareentwickler
-      mithilfe eines KI-gestützten Portfolios einzuschätzen.
+      {t.statement}
     </p>
 
     <span class="reveal reveal--pop d-420 mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.16em] text-white/60">
       <span class="text-[1.05em] leading-none">🇨🇭</span>
-      Schweizer Startups
+      {t.badge}
     </span>
   </div>
 </section>

@@ -1,10 +1,18 @@
 ---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+const t = translation.experience;
 ---
 
 <section id="experience" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
   <div class="flex flex-col gap-3">
-    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">02 — Erfahrung</span>
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Mein Hintergrund</h2>
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.label}</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{t.heading}</h2>
   </div>
 
   <ol class="relative mt-14 ml-2 border-l-2 border-slate-200">
@@ -17,16 +25,16 @@
         <div class="min-w-0">
           <div class="flex flex-wrap items-center gap-2.5">
             <span class="whitespace-nowrap font-mono text-xs text-slate-500">2022 — 2026</span>
-            <span class="rounded-full bg-brand/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide text-brand">Arbeit</span>
+            <span class="rounded-full bg-brand/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide text-brand">{t.work_badge}</span>
           </div>
-          <h3 class="mt-3 text-xl font-bold text-slate-900">Gründungsingenieur</h3>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">{t.alignment_role}</h3>
           <div class="mt-2.5 flex items-center gap-2">
             <img src="/assets/logos/alignment.png" alt="" class="h-5 w-auto" />
             <a href="https://alignment.io" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-slate-700 hover:text-brand">Alignment.io</a>
           </div>
-          <p class="mt-2.5 text-[15px] leading-relaxed text-slate-500">KI-SaaS für Geschäftsstrategie.</p>
-          <p class="mt-1.5 font-mono text-xs text-slate-400">Remote · StartX, Kalifornien, USA</p>
-          <a href="#work" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">Mehr zu meiner Arbeit →</a>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-slate-500">{t.alignment_description}</p>
+          <p class="mt-1.5 font-mono text-xs text-slate-400">{t.alignment_location}</p>
+          <a href="#work" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">{t.alignment_link}</a>
         </div>
       </article>
     </li>
@@ -39,16 +47,16 @@
         <div class="min-w-0">
           <div class="flex flex-wrap items-center gap-2.5">
             <span class="whitespace-nowrap font-mono text-xs text-slate-500">2020 — 2022</span>
-            <span class="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide text-slate-500">Ausbildung</span>
+            <span class="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide text-slate-500">{t.education_badge}</span>
           </div>
           <h3 class="mt-3 text-xl font-bold text-slate-900">B.Sc. Cybersecurity</h3>
           <div class="mt-2.5 flex items-center gap-2">
             <img src="/assets/logos/nvna.png" alt="" class="h-5 w-auto" />
-            <a href="https://www.naval-acad.bg/en" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-slate-700 hover:text-brand">Naval Akademie Nikola Vaptsarov</a>
+            <a href="https://www.naval-acad.bg/en" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-slate-700 hover:text-brand">{t.naval_school}</a>
           </div>
-          <p class="mt-2.5 text-[15px] leading-relaxed text-slate-500">Fokus: sichere Systeme, Netzwerke, Kryptografie.</p>
-          <p class="mt-1.5 font-mono text-xs text-slate-400">Bulgarien</p>
-          <a href="/assets/files/nanv-transcript-de.pdf" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">Transcript ansehen ↗</a>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-slate-500">{t.naval_description}</p>
+          <p class="mt-1.5 font-mono text-xs text-slate-400">{t.naval_location}</p>
+          <a href="/assets/files/nanv-transcript-de.pdf" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline">{t.naval_link}</a>
         </div>
       </article>
     </li>

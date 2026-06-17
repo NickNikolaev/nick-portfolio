@@ -1,4 +1,13 @@
 ---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+const t = translation.social_proof;
+
 const logos = [
   { src: '/assets/logos/defensestorm.png',      alt: 'DefenseStorm', h: 'h-7' },
   { src: '/assets/logos/redpoint.png',          alt: 'Redpoint',     h: 'h-5' },
@@ -9,8 +18,8 @@ const logos = [
 ];
 ---
 
-<section aria-label="Aufgebaute Software im Einsatz bei" class="border-y border-brand/10 bg-brand/5 py-12">
-  <p class="text-center font-mono text-xs uppercase tracking-[0.18em] text-slate-400">Aufgebaute Software im Einsatz bei</p>
+<section aria-label={t.heading} class="border-y border-brand/10 bg-brand/5 py-12">
+  <p class="text-center font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.heading}</p>
 
   <div class="group relative mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
     <div class="flex w-max animate-marquee items-center group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:justify-center">

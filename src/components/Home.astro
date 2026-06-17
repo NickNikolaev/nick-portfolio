@@ -1,0 +1,33 @@
+---
+import Hero from './Hero.astro';
+import Experience from './Experience.astro';
+import Work from './Work.astro';
+import Impact from './Impact.astro';
+import AiWorkflow from './AiWorkflow.astro';
+import Faq from './Faq.astro';
+import SocialProof from './SocialProof.astro';
+import Mission from './Mission.astro';
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+---
+
+<Hero translation={translation} />
+
+<SocialProof translation={translation} />
+
+<Experience translation={translation} />
+
+<Work />
+
+<Impact translation={translation} />
+
+<AiWorkflow translation={translation} />
+
+<Faq translation={translation} />
+
+<Mission translation={translation} />

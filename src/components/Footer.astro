@@ -1,4 +1,13 @@
 ---
+import type { Lang, Translation } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+const t = translation.footer;
 const year = new Date().getFullYear();
 ---
 
@@ -7,8 +16,8 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
       <div>
         <p class="text-base font-semibold text-slate-900">Nick Nikolaev</p>
-        <p class="mt-2 text-sm text-slate-600">Gründungsingenieur</p>
-        <p class="mt-1 text-sm text-slate-500">Impact Hub Colab, Zürich</p>
+        <p class="mt-2 text-sm text-slate-600">{t.role}</p>
+        <p class="mt-1 text-sm text-slate-500">{t.location}</p>
       </div>
 
       <ul class="space-y-2 text-sm text-slate-600">
@@ -44,7 +53,7 @@ const year = new Date().getFullYear();
             download
             class="transition hover:text-brand"
           >
-            Lebenslauf herunterladen - DE
+            {t.cv_de}
           </a>
         </li>
         <li>
@@ -53,12 +62,12 @@ const year = new Date().getFullYear();
               download
               class="transition hover:text-brand"
           >
-            Lebenslauf herunterladen - EN
+            {t.cv_en}
           </a>
         </li>
         <li>
           <a href="https://github.com/NickNikolaev/nick-portfolio" target="_blank" class="transition hover:text-brand">
-            Repository ansehen
+            {t.repository}
           </a>
         </li>
       </ul>
@@ -66,7 +75,7 @@ const year = new Date().getFullYear();
 
     <div class="mt-12 flex flex-col gap-2 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:justify-between">
       <p>© {year} Nick Nikolaev</p>
-      <p>Entwickelt mit <img src="/assets/logos/claude.svg" alt="Claude" class="inline h-4 w-auto align-middle" /> Code</p>
+      <p>{t.built_with} <img src="/assets/logos/claude.svg" alt="Claude" class="inline h-4 w-auto align-middle" /> Code</p>
     </div>
   </div>
 </footer>

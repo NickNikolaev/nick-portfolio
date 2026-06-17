@@ -1,15 +1,13 @@
 ---
-interface Kpi {
-  value: string;
-  label: string;
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
 }
 
-const kpis: Kpi[] = [
-  { value: '1000+', label: 'Nachrichte zugestellt' },
-  { value: '100+',  label: 'Aktivi Nutzer unterstützt' },
-  { value: '99.9%', label: 'Plattform-Verfügbarkeit' },
-  { value: '50+',   label: 'Releases usgliefert' },
-];
+const { translation } = Astro.props;
+const t = translation.impact;
+const kpis = t.kpis;
 
 const tile_class =
   'relative isolate flex min-h-[156px] flex-col justify-end overflow-hidden rounded-2xl bg-brand p-8 shadow-sm ring-1 ring-brand/20 transition duration-200 hover:-translate-y-0.5 hover:shadow-md ' +
@@ -20,10 +18,10 @@ const tile_class =
 
 <section id="impact" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
   <div class="flex flex-col gap-3">
-    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">04 — Auswirkungen</span>
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Was ich bei Alignment.io erreicht habe</h2>
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.label}</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{t.heading}</h2>
     <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
-      Vier messbare Kennzahlen aus meiner Zeit als Gründungsingenieur.
+      {t.subtitle}
     </p>
   </div>
 

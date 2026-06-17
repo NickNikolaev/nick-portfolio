@@ -2,21 +2,20 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import type { Lang, Translation } from '../i18n/translations';
 
 interface Props {
-  title?: string;
-  description?: string;
+  lang: Lang;
+  translation: Translation;
 }
 
-const {
-  title = 'Nick Nikolaev — AI-powered Tech-Leiter',
-  description = 'AI-powered Tech-Leiter für Early-Stage-Startups, die schnell ein starkes Produkt bauen und skalieren wollen.',
-} = Astro.props;
+const { lang, translation } = Astro.props;
+const { title, description } = translation.meta;
 ---
 
 <!doctype html>
 <!-- This scrolling class makes sure that clicking on the navigation links scrolls smoothly to the given section -->
-<html lang="de" class="motion-safe:scroll-smooth">
+<html lang={lang} class="motion-safe:scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,10 +29,10 @@ const {
     />
   </head>
   <body class="font-sans bg-white text-slate-900 antialiased">
-    <Nav />
+    <Nav lang={lang} translation={translation} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} translation={translation} />
   </body>
 </html>

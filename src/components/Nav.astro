@@ -1,19 +1,29 @@
 ---
+import type { Lang, Translation } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+  translation: Translation;
+}
+
+const { lang, translation } = Astro.props;
+const t = translation.nav;
+
 const links = [
-  { href: '/#intro',          key: 'nav.intro',    label: 'Intro' },
-  { href: '/#experience', key: 'nav.exp',      label: 'Erfahrung' },
-  { href: '/#work',       key: 'nav.work',     label: 'Arbeit' },
-  { href: '/#impact',       key: 'nav.impact', label: 'Auswirkungen' },
-  { href: '/#ai-workflow', key: 'nav.aiworkflow', label: 'KI-Workflow' },
-  { href: '/#faq',      key: 'nav.faq',      label: 'FAQ' },
+  { href: `/${lang}#intro`,       label: t.intro },
+  { href: `/${lang}#experience`,  label: t.experience },
+  { href: `/${lang}#work`,        label: t.work },
+  { href: `/${lang}#impact`,      label: t.impact },
+  { href: `/${lang}#ai-workflow`, label: t.ai_workflow },
+  { href: `/${lang}#faq`,         label: t.faq },
 ];
 ---
 
 <header class="sticky top-0 z-30 border-b border-slate-100 bg-white/80 backdrop-blur">
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
-    <!-- Language toggle (replaces wordmark) -->
+    <!-- Language toggle (replaces wordmark) — active language is rendered first (left) -->
     <span class="inline-flex overflow-hidden rounded-lg border border-slate-200" id="lang-toggle">
-      <button type="button" data-lang="de" class="js-lang px-3 py-1.5 font-mono text-xs font-bold tracking-wide text-slate-500 transition data-[active]:bg-brand data-[active]:text-white" data-active>DE</button>
+      <button type="button" data-lang="de" class="js-lang px-3 py-1.5 font-mono text-xs font-bold tracking-wide text-slate-500 transition data-[active]:bg-brand data-[active]:text-white">DE</button>
       <button type="button" data-lang="en" class="js-lang px-3 py-1.5 font-mono text-xs font-bold tracking-wide text-slate-500 transition data-[active]:bg-brand data-[active]:text-white">EN</button>
     </span>
 
@@ -22,14 +32,13 @@ const links = [
       { links.map((l) => (
           <a
               href={l.href}
-              data-i18n={l.key}
               class="transition hover:text-brand"
           >{l.label}</a>
       ))}
     </div>
 
     <!-- Hamburger (mobile-only) -->
-    <button class="md:hidden flex flex-col gap-1.5 p-2 js-hamburger" aria-label="Menü öffnen" aria-expanded="false">
+    <button class="md:hidden flex flex-col gap-1.5 p-2 js-hamburger" aria-label={t.menu_open} aria-expanded="false">
       <span class="block h-0.5 w-5 bg-slate-700 transition-all js-bar-1"></span>
       <span class="block h-0.5 w-5 bg-slate-700 transition-all js-bar-2"></span>
       <span class="block h-0.5 w-5 bg-slate-700 transition-all js-bar-3"></span>
@@ -41,7 +50,6 @@ const links = [
     {links.map((l) => (
         <a
             href={l.href}
-            data-i18n={l.key}
             class="block py-2.5 text-sm font-medium text-slate-700 transition hover:text-brand"
         >{l.label}</a>
     ))}
@@ -49,6 +57,7 @@ const links = [
 </header>
 
 <script>
+  // Hamburger toggle (mobile)
   const hamburger = document.querySelector('.js-hamburger') as HTMLButtonElement;
   const mobile_menu = document.querySelector('.js-mobile-menu') as HTMLElement;
   const bar_1 = document.querySelector('.js-bar-1') as HTMLElement;
@@ -64,4 +73,43 @@ const links = [
     bar_3.classList.toggle('-translate-y-2', open);
     bar_3.classList.toggle('-rotate-45', open);
   });
+
+  // Language toggle
+  const reduce_motion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Determine active language from the current URL
+  const current_lang = location.pathname.startsWith('/en') ? 'en' : 'de';
+
+  // Rebuild toggle DOM so the active language is always on the left
+  const lang_toggle = document.getElementById('lang-toggle') as HTMLElement;
+  const btn_de = lang_toggle.querySelector('[data-lang="de"]') as HTMLButtonElement;
+  const btn_en = lang_toggle.querySelector('[data-lang="en"]') as HTMLButtonElement;
+  if (current_lang === 'en') {
+    lang_toggle.appendChild(btn_de); // DE was first in HTML — move it to the end
+  }
+  btn_de.removeAttribute('data-active');
+  btn_en.removeAttribute('data-active');
+  (current_lang === 'de' ? btn_de : btn_en).setAttribute('data-active', '');
+
+  // Click handler — ignore clicks on the already-active language
+  lang_toggle.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.js-lang') as HTMLButtonElement | null;
+    if (!btn || btn.dataset.lang === current_lang) return;
+    swap_and_navigate(btn.dataset.lang as string);
+  });
+
+  function swap_and_navigate(target_lang: string) {
+    // Slide out the currently active button, then navigate
+    if (reduce_motion) {
+      location.href = `/${target_lang}`;
+      return;
+    }
+    const active_btn = lang_toggle.querySelector('[data-active]') as HTMLElement;
+    active_btn.style.transition = 'opacity 100ms ease, transform 100ms ease';
+    active_btn.style.opacity = '0';
+    active_btn.style.transform = 'translateX(6px)';
+    setTimeout(() => {
+      location.href = `/${target_lang}`;
+    }, 120);
+  }
 </script>

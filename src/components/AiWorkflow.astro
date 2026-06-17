@@ -1,64 +1,31 @@
 ---
+import type { Translation } from '../i18n/translations';
+
 type DemoType = 'typewriter' | 'split' | 'tests' | 'terminal' | 'checks' | 'git';
 
-interface Step {
-  title: string;
-  description: string;
-  why: string;
-  demo: DemoType;
-  optional?: boolean;
+interface Props {
+  translation: Translation;
 }
+
+const { translation } = Astro.props;
+const t = translation.ai_workflow;
 
 const tools = [
   { name: 'Claude Code', logo: '/assets/logos/claude.svg' },
   { name: 'Cursor',      logo: '/assets/logos/cursor.png' },
 ];
 
-const steps: Step[] = [
-  {
-    title: 'Spec zuerst',
-    demo: 'typewriter',
-    description:
-      'Cursor generiert die Spec-Datei 01-feature.md mit User Stories (Given/When/Then), Acceptance Criteria, Tech Stack und Constraints.',
-    why: 'Eine KI ohne klare Spec löst das falsche Problem.',
-  },
-  {
-    title: 'Design Handoff + Iteration',
-    demo: 'split',
-    optional: true,
-    description:
-      'Claude Design generiert eine Visualisierung basierend auf requirements.md. Nach abgeschlossener Iteration wird der Handoff-Ordner exportiert.',
-    why: 'Eine einzige Quelldatei verhindert, dass Spec und Design auseinanderlaufen.',
-  },
-  {
-    title: 'Tests vor Code',
-    demo: 'tests',
-    description:
-      'Claude Code generiert eine komplette Test-Suite (Unit / Component / E2E) inklusive Edge Cases. Alle Tests schlagen fehl — das ist korrekt.',
-    why: 'Tests definieren «done». Ohne Tests passt die KI den Code an — nicht das Problem.',
-  },
-  {
-    title: 'Code-Generierung',
-    demo: 'terminal',
-    description:
-      'Claude Code (Agent Mode) implementiert die Lösung gegen die bestehende Test-Suite. Der Prompt enthält: «Ändere die Tests nicht, um sie zu bestehen.»',
-    why: 'Dieser eine Satz verhindert, dass die KI sich selbst betrügt.',
-  },
-  {
-    title: 'Abnahme via Slash Command',
-    demo: 'checks',
-    description:
-      'Claude Code führt /verify docs/specs/YYYY/MM/01-feature.md aus — prüft, ob alle User Stories abgedeckt und die CONSTITUTION.md-Regeln eingehalten sind.',
-    why: 'Grüne Tests ≠ vollständige Lösung.',
-  },
-  {
-    title: 'Commit & GitHub Push',
-    demo: 'git',
-    description:
-      'Commit im Conventional-Commits-Format, Push zu GitHub, CI/CD läuft automatisch durch.',
-    why: 'Nachvollziehbarkeit ist Professionalität.',
-  },
+// Demo type + flags stay in the component; copy comes from the translation
+const stepMeta: { demo: DemoType; optional?: boolean }[] = [
+  { demo: 'typewriter' },
+  { demo: 'split', optional: true },
+  { demo: 'tests' },
+  { demo: 'terminal' },
+  { demo: 'checks' },
+  { demo: 'git' },
 ];
+
+const steps = t.steps.map((step, i) => ({ ...step, ...stepMeta[i] }));
 
 const lastIndex = steps.length - 1;
 const promptText =
@@ -74,10 +41,10 @@ const checkItems = [
 <section id="ai-workflow" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
   <!-- Header -->
   <div class="flex flex-col gap-3">
-    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">05 — KI-Workflow</span>
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Wie ich KI in der Entwicklung einsetze</h2>
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.label}</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{t.heading}</h2>
     <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
-      Strukturierter Prozess — von der Spec bis zum Commit — mit Claude Code und Cursor.
+      {t.subtitle}
     </p>
     <!-- Tool-Badges -->
     <div class="mt-1 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -110,13 +77,13 @@ const checkItems = [
             <h3 class="text-base font-semibold text-slate-900">{step.title}</h3>
             {step.optional && (
               <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-slate-500">
-                Optional
+                {t.optional_badge}
               </span>
             )}
           </div>
           <p class="mt-2 text-[15px] leading-relaxed text-slate-600">{step.description}</p>
           <p class="mt-3 border-l-2 border-brand/30 pl-3 text-sm italic text-slate-500">
-            <span class="font-medium not-italic text-slate-600">Warum:</span> {step.why}
+            <span class="font-medium not-italic text-slate-600">{t.why_label}</span> {step.why}
           </p>
 
           <!-- Animations-Panel (dekorativ) -->

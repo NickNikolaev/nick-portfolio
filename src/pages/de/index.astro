@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import Home from '../../components/Home.astro';
+import { translations } from '../../i18n/translations';
+
+const lang = 'de';
+const translation = translations[lang];
+---
+
+<Base lang={lang} translation={translation}>
+  <Home translation={translation} />
+</Base>

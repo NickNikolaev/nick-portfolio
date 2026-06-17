@@ -75,7 +75,10 @@
     (function tick() {
       const w = ROLES[r];
       c += del ? -1 : 1;
-      roleEl.textContent = w.slice(0, c);
+
+      // When the text is empty, we need a non-breaking space to prevent flickering
+      roleEl.textContent = w.slice(0, c) || '\u00A0';
+
       if (!del && c === w.length) { del = true; return setTimeout(tick, 1600); }
       if (del && c === 0) { del = false; r = (r + 1) % ROLES.length; return setTimeout(tick, 280); }
       setTimeout(tick, del ? 40 : 85);

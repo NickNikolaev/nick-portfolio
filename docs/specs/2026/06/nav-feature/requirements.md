@@ -1,6 +1,6 @@
 # Nav — Language Toggle — Requirements
 
-**Status:** Implemented v1 — Erstellt: 17. Juni 2026 — Umgsetzt: 17. Juni 2026
+**Status:** Implemented v2 — Erstellt: 17. Juni 2026 — Überarbeitet: 17. Juni 2026
 
 ## Ziel
 
@@ -44,28 +44,15 @@ export default defineConfig({
 
 ## Toggle-Verhalten
 
-### Visuell: Aktivi Sprach immer links
+### Visuell: Immer `DE | EN` — aktivi Sprach highlighted
 
-D Reihefolg vo de Buttons im `#lang-toggle`-Element wechslet dynamisch per JS.
+D Reihefolg isch fix — immer `DE | EN`. D aktivi Sprach kriegt `data-active` per JS, Tailwind reglet d Farb:
 
-| Zustand | Toggle-Anzeig | Aktiver Button |
-|---------|--------------|----------------|
-| DE aktiv | `DE \| EN` | DE (links) |
-| EN aktiv | `EN \| DE` | EN (links) |
-
-### Swap-Effekt
-
-Wenn d Sprach gwechslet wird:
-
-1. Dr aktive Button faded/slides raus (`opacity: 0`, `transform: translateX(6px)`, ~100ms)
-2. Navigation zur neie URL (`/de` oder `/en`) — DOM-Rebuild passiert beim neue Seitenlade
-
-### CSS-Klasse für aktive Sprach
-
-Dr aktive Button het `data-active` — Tailwind reglet d Farb:
 ```
 data-[active]:bg-brand data-[active]:text-white
 ```
+
+Kei DOM-Reorder, kei Animation — einfach und direkt.
 
 ### JS-Handling (ausschliesslich in `Nav.astro`)
 
@@ -73,34 +60,19 @@ data-[active]:bg-brand data-[active]:text-white
 <script>
   // Determine active language from the current URL
   const current_lang = location.pathname.startsWith('/en') ? 'en' : 'de';
-
-  // Rebuild toggle DOM so the active language is always on the left
   const lang_toggle = document.getElementById('lang-toggle');
   const btn_de = lang_toggle.querySelector('[data-lang="de"]');
   const btn_en = lang_toggle.querySelector('[data-lang="en"]');
-  if (current_lang === 'en') {
-    lang_toggle.appendChild(btn_de); // DE was first in HTML — move it to the end
-  }
-  btn_de.removeAttribute('data-active');
-  btn_en.removeAttribute('data-active');
+
+  // Mark the active language button
   (current_lang === 'de' ? btn_de : btn_en).setAttribute('data-active', '');
 
-  // Click handler — ignore clicks on the already-active language
+  // Navigate on click — ignore clicks on the already-active language
   lang_toggle.addEventListener('click', (e) => {
     const btn = e.target.closest('.js-lang');
     if (!btn || btn.dataset.lang === current_lang) return;
-    swap_and_navigate(btn.dataset.lang);
+    location.href = `/${btn.dataset.lang}`;
   });
-
-  function swap_and_navigate(target_lang) {
-    // Slide out the currently active button, then navigate
-    if (reduce_motion) { location.href = `/${target_lang}`; return; }
-    const active_btn = lang_toggle.querySelector('[data-active]');
-    active_btn.style.transition = 'opacity 100ms ease, transform 100ms ease';
-    active_btn.style.opacity = '0';
-    active_btn.style.transform = 'translateX(6px)';
-    setTimeout(() => { location.href = `/${target_lang}`; }, 120);
-  }
 </script>
 ```
 
@@ -228,11 +200,11 @@ astro.config.mjs             ← redirects: { '/': '/de' }
 - [x] `src/i18n/translations.ts` enthält alli Keys (snake_case, zwei Sprache)
 - [x] `Base.astro` akzeptiert `lang`-Prop, setzt `<html lang="">` korrekt
 - [x] `Base.astro` setzt `<title>` und `<meta description>` pro Sprach
-- [x] `Nav.astro` JS bestimmt aktuelle Sprach us dr URL und baut Toggle korrekt uf (aktivi Sprach links)
-- [x] Click uf inaktivi Sprach löst Swap-Animation aus (opacity + translateX, 120ms) und navigiert zur neue URL
+- [x] `Nav.astro` JS bestimmt aktuelle Sprach us dr URL und setzt `data-active` korrekt (immer `DE|EN`, aktivi Sprach highlighted)
+- [x] Click uf inaktivi Sprach navigiert direkt zur neue URL — kei Animation
 - [x] Alli `data-i18n`-Attribute sin durch Astro-Props ersetzt — kein client-seitiger Text-Swap
 - [x] Typing-Effekt in `Hero.astro` bliibt unverändert (englischi Rollen-Titel)
 - [x] `Work.astro` het kein Übersetzungs-Scope
 - [x] Visuelle Demo-Elemente in `AiWorkflow.astro` sin unverändert
 - [x] "Nick Nikolaev" und "© 2026 Nick Nikolaev" in `Footer.astro` sin unverändert
-- [x] `prefers-reduced-motion`: Swap-Animation deaktiviert, direkte Navigation
+- [x] `prefers-reduced-motion`: kein Effekt — Toggle navigiert immer direkt

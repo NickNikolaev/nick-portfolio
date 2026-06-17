@@ -32,7 +32,7 @@ export const translations = {
       scroll: 'Scrollen zum Entdecken',
     },
     social_proof: {
-      heading: 'Aufgebaute Software im Einsatz bei',
+      heading: 'Entwickelte Software genutzt bei',
     },
     experience: {
       label: '02 — Erfahrung',
@@ -53,10 +53,10 @@ export const translations = {
       heading: 'Was ich bei Alignment.io erreicht habe',
       subtitle: 'Vier messbare Kennzahlen aus meiner Zeit als Gründungsingenieur.',
       kpis: [
-        { value: '1000+', label: 'Nachrichte zugestellt' },
-        { value: '100+', label: 'Aktivi Nutzer unterstützt' },
+        { value: '1000+', label: 'Nachrichten zugestellt' },
+        { value: '100+', label: 'Aktive Nutzer unterstützt' },
         { value: '99.9%', label: 'Plattform-Verfügbarkeit' },
-        { value: '50+', label: 'Releases usgliefert' },
+        { value: '50+', label: 'Releases ausgeliefert' },
       ],
     },
     ai_workflow: {
@@ -157,7 +157,7 @@ export const translations = {
       label: '01 — INTRO',
       name_label: 'Name',
       location_label: 'Location',
-      location_value: 'Zürich, CH',
+      location_value: 'Zurich, CH',
       role_label: 'Role',
       role_value: 'Founding Engineer',
       mode_label: 'Mode',
@@ -171,7 +171,7 @@ export const translations = {
       scroll: 'Scroll to explore',
     },
     social_proof: {
-      heading: 'Software I built, in use at',
+      heading: 'Built software used at',
     },
     experience: {
       label: '02 — Experience',
@@ -253,7 +253,7 @@ export const translations = {
           question: 'Remote or on-site?',
           answer: 'On-site — German-speaking Switzerland. Relocation possible.',
         },
-        { question: 'Permanent or freelance?', answer: 'Permanent only.' },
+        { question: 'Full-time employment or freelance?', answer: 'Full-time employment only.' },
         {
           question: 'Work authorization in Switzerland?',
           answer: 'EU passport — fully authorized to work in Switzerland. No sponsorship needed.',
@@ -269,7 +269,7 @@ export const translations = {
     },
     footer: {
       role: 'Founding Engineer',
-      location: 'Impact Hub Colab, Zürich',
+      location: 'Impact Hub Colab, Zurich',
       cv_de: 'Download CV - DE',
       cv_en: 'Download CV - EN',
       repository: 'View repository',

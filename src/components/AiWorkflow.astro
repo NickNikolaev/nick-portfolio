@@ -19,7 +19,7 @@ const steps: Step[] = [
     title: 'Spec zuerst',
     demo: 'typewriter',
     description:
-      'Claude Code generiert die Spec-Datei 01-feature.md mit User Stories (Given/When/Then), Acceptance Criteria, Tech Stack und Constraints.',
+      'Cursor generiert die Spec-Datei 01-feature.md mit User Stories (Given/When/Then), Acceptance Criteria, Tech Stack und Constraints.',
     why: 'Eine KI ohne klare Spec löst das falsche Problem.',
   },
   {
@@ -27,7 +27,7 @@ const steps: Step[] = [
     demo: 'split',
     optional: true,
     description:
-      'Claude generiert eine design.md mit Component-Struktur, Props, States und Tailwind-Klassen. Iteration in Cursor. Danach wird sie in 01-feature.md integriert und gelöscht.',
+      'Claude Design generiert eine Visualisierung basierend auf requirements.md. Nach abgeschlossener Iteration wird der Handoff-Ordner exportiert.',
     why: 'Eine einzige Quelldatei verhindert, dass Spec und Design auseinanderlaufen.',
   },
   {
@@ -41,7 +41,7 @@ const steps: Step[] = [
     title: 'Code-Generierung',
     demo: 'terminal',
     description:
-      'Cursor (Agent Mode) implementiert die Lösung gegen die bestehende Test-Suite. Der Prompt enthält: «Ändere die Tests nicht, um sie zu bestehen.»',
+      'Claude Code (Agent Mode) implementiert die Lösung gegen die bestehende Test-Suite. Der Prompt enthält: «Ändere die Tests nicht, um sie zu bestehen.»',
     why: 'Dieser eine Satz verhindert, dass die KI sich selbst betrügt.',
   },
   {
@@ -62,7 +62,7 @@ const steps: Step[] = [
 
 const lastIndex = steps.length - 1;
 const promptText =
-  '"Build me the KI-Workflow timeline section based on docs/specs/2026/06/ai-section/requirements.md — include all 6 steps, animations, and tool badges."';
+  '"Build me the AI-Workflow timeline section based on docs/specs/2026/06/ai-section/requirements.md — include all 6 steps, animations, and tool badges."';
 const checkItems = [
   'Visitor sees 6 steps',
   'Step 2 displays an "Optional" badge',
@@ -77,7 +77,7 @@ const checkItems = [
     <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">05 — KI-Workflow</span>
     <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Wie ich KI in der Entwicklung einsetze</h2>
     <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
-      «Kein Copy-Paste. Ich folge einem strukturierten Prozess — von der Spec bis zum Commit — mit Claude Code und Cursor als KI-Tools.»
+      Strukturierter Prozess — von der Spec bis zum Commit — mit Claude Code und Cursor.
     </p>
     <!-- Tool-Badges -->
     <div class="mt-1 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -159,9 +159,9 @@ const checkItems = [
                 <div class="border-b border-slate-100 bg-slate-50 px-3 py-2 font-mono text-[11px] text-slate-400">vitest run</div>
                 <div class="space-y-1 px-4 py-3 font-mono text-[12px] leading-relaxed">
                   <div class="ai-ln text-slate-500">describe('AiWorkflow', () =&gt; &#123;</div>
-                  <div class="ai-ln pl-3 text-slate-500">it('rendert 6 Schritte')</div>
-                  <div class="ai-ln pl-3 text-slate-500">it('Badge nur bei Schritt 2')</div>
-                  <div class="ai-ln pl-3 text-slate-500">it('Connector endet vor 06')</div>
+                  <div class="ai-ln pl-3 text-slate-500">it('renders 6 steps')</div>
+                  <div class="ai-ln pl-3 text-slate-500">it('shows Optional badge on step 2')</div>
+                  <div class="ai-ln pl-3 text-slate-500">it('connector stops before 06')</div>
                   <div class="ai-ln flex items-center gap-2 pt-1">
                     <span class="rounded bg-red-100 px-1.5 py-0.5 text-[10px] font-bold text-red-600">FAIL</span>
                     <span class="text-slate-400">3 failed · 0 passed</span>
@@ -212,11 +212,11 @@ const checkItems = [
                   <circle cx="160" cy="32" r="6" fill="#94a3b8" />
                   <circle cx="300" cy="32" r="6" fill="#026766" />
                   <circle class="ai-gitdot" cx="20" cy="32" r="7" fill="#026766" />
-                  <text x="20" y="56" font-size="10" fill="#94a3b8" text-anchor="middle" class="font-mono">main</text>
-                  <text x="300" y="56" font-size="10" fill="#026766" text-anchor="end" class="font-mono">origin/main</text>
+                  <text x="20" y="56" font-size="8" fill="#94a3b8" text-anchor="middle" class="font-mono">main</text>
+                  <text x="300" y="56" font-size="8" fill="#026766" text-anchor="end" class="font-mono">origin/main</text>
                 </svg>
                 <div class="ai-confetti pointer-events-none absolute right-8 top-8"></div>
-                <div class="mt-1 font-mono text-[11px] text-slate-500">feat(ui): add AI-Workflow timeline section</div>
+                <div class="font-mono mt-1 pl-4 max-md:pl-2 text-[11px] max-md:text-[10px] text-slate-500">feat(ui): add AI-Workflow timeline section</div>
               </div>
             )}
           </div>

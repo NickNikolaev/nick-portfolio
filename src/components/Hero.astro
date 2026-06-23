@@ -9,7 +9,8 @@ const { translation } = Astro.props;
 const t = translation.hero;
 ---
 
-<div class="relative overflow-hidden">
+<!-- We need a bit of top spacing on mobile; otherwise, Nick’s image is too close to the top of the viewport. -->
+<div class="relative overflow-hidden max-md:mt-3">
 
   <!-- animated blueprint-grid background -->
   <div class="pointer-events-none absolute inset-0 z-0 [background-image:linear-gradient(rgba(2,103,102,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(2,103,102,.10)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_90%_75%_at_65%_45%,#000_35%,transparent_90%)] animate-grid-drift motion-reduce:animate-none"></div>

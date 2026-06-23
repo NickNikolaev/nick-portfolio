@@ -1,64 +1,83 @@
 ---
+type DemoType = 'dashboard' | 'auth' | 'rbac' | 'search' | 'kanban' | 'chat';
 
-interface WorkItem {
+interface Card {
   title: string;
   text: string;
   kind: 'feature' | 'process';
-  image: string;
-  alt: string;
+  demo: DemoType;
 }
 
-interface Tech {
-  label: string;
-  logo: string;
-}
-
-const features: WorkItem[] = [
+const features: Card[] = [
   {
-    title: 'Dashboard',
-    kind: 'feature',
-    image: '/assets/images/work/dashboard.png',
-    alt: 'Alignment.io Dashboard',
-    text: 'Dashboard-Arbeitsbereich workspace-wide von Figma-Design bis zum fertigen Feature — für vierteljähriges Alignment-Tracking.',
+    title: 'Dashboard', kind: 'feature', demo: 'dashboard',
+    text: 'Workspace-weiter Dashboard-Arbeitsbereich von Figma-Design bis zum fertigen Feature — für das vierteljährliche Alignment-Tracking der Teams.',
   },
   {
-    title: 'Authentifizierung',
-    kind: 'feature',
-    image: '/assets/images/work/authentication.png',
-    alt: 'Alignment.io — Authentication',
-    text: 'Authentifizierungs-Flows umgesetzt: SAML SSO, Google OAuth und Apple OAuth.',
+    title: 'Authentifizierung', kind: 'feature', demo: 'auth',
+    text: 'Authentifizierungs-Flows umgesetzt: Google OAuth, Apple OAuth und SAML SSO für Enterprise-Kunden.',
   },
   {
-    title: 'RBAC',
-    kind: 'feature',
-    image: '/assets/images/work/rbac.png',
-    alt: 'Alignment.io — RBAC',
-    text: 'Zugriffssteuerung workspace-wide, team-wide und project-wide.',
+    title: 'RBAC', kind: 'feature', demo: 'rbac',
+    text: 'Rollenbasierte Zugriffsteuerung — workspace-weit, team-weit und projekt-weit, plus teilbare externe Links.',
   },
   {
-    title: 'Suche',
-    kind: 'feature',
-    image: '/assets/images/work/search.png',
-    alt: 'Alignment.io — Search',
-    text: 'Globale Suche powered by ElasticSearch für alle Nachrichten, Items und Projekte.',
+    title: 'Suche', kind: 'feature', demo: 'search',
+    text: 'Globale Suche powered by ElasticSearch — über alle Nachrichten, Items und Projekte, mit Match-Highlighting.',
   },
   {
-    title: 'Release-Verwaltung',
-    kind: 'process',
-    image: '/assets/images/work/kanban.png',
-    alt: 'Alignment.io — Kanban Board',
-    text: 'QA- und Release-Prozesse; 5-köpfiges Team in einem Agile-Umfeld geleitet.',
+    title: 'Release-Verwaltung', kind: 'process', demo: 'kanban',
+    text: 'QA- und Release-Prozesse aufgebaut; ein 5-köpfiges Team in einem agilen Umfeld geleitet — von Todo über QA zu Done.',
   },
   {
-    title: 'KI-Chat-System',
-    kind: 'feature',
-    image: '/assets/images/work/chat.png',
-    alt: 'Alignment.io — Chat',
-    text: 'Plattformweite sichere Zusammenarbeit — Echtzeit-AI-Chat-System entwickelt; Entwicklung einer Mobile-App unterstützt und koordiniert.',
+    title: 'KI-Chat-System', kind: 'feature', demo: 'chat',
+    text: 'Ein Echtzeit-KI-Chat-System entwickelt, das direkt auf den Dashboard-Daten arbeitet — strukturierte Antworten statt bloßem Chat.',
   },
 ];
 
-const techStack: Tech[] = [
+const revealCard = 'opacity-0 translate-y-[18px] transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:translate-y-0 motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none';
+const revealPanel = 'opacity-0 scale-95 transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:scale-100 motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:transition-none';
+const revealUp = 'opacity-0 translate-y-1.5 transition-[opacity,transform] duration-300 ease-out data-[in]:opacity-100 data-[in]:translate-y-0 motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none';
+const revealUpMd = 'opacity-0 translate-y-2 transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:translate-y-0 motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none';
+const revealLeft = 'opacity-0 -translate-x-1.5 transition-[opacity,transform] duration-300 ease-out data-[in]:opacity-100 data-[in]:translate-x-0 motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none';
+const revealRight = 'opacity-0 translate-x-3 transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:translate-x-0 motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none';
+const revealPop = 'opacity-0 scale-75 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.3,1.4,0.5,1)] data-[in]:opacity-100 data-[in]:scale-100 motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:transition-none';
+const revealScaleSubtle = 'opacity-0 scale-[0.97] transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:scale-100 motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:transition-none';
+const revealTiny = 'opacity-0 translate-y-[5px] transition-[opacity,transform] duration-300 ease-out data-[in]:opacity-100 data-[in]:translate-y-0 motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none';
+
+const dashRows = [
+  { team: 'Exec',      w: 40, swot: [[5, 3], [2, 3, 0]],  bars: [3, 5, 7, 6, 4, 5] },
+  { team: 'Product',   w: 62, swot: [[5, 7], [1, 3, 7]],  bars: [2, 4, 6, 8, 5, 3] },
+  { team: 'Design',    w: 65, swot: [[11, 7], [7, 5, 7]], bars: [1, 2, 5, 7, 8, 6] },
+  { team: 'Marketing', w: 30, swot: [[5, 4], [12, 3, 7]], bars: [3, 4, 3, 5, 4, 2] },
+];
+// SWOT-Chip-Tönung nach Position (Strengths · Weaknesses · Opportunities · Threats · n/a)
+const swotTone = [
+  'bg-slate-100 text-slate-600',
+  'bg-amber-100 text-amber-700',
+  'bg-emerald-100 text-emerald-700',
+  'bg-rose-100 text-rose-700',
+  'border border-slate-200 text-slate-500',
+];
+
+const rbacRows = [
+  { ini: 'NN', name: 'Nick Nikolaev', role: 'project owner', bg: 'bg-brand/10 text-brand' },
+  { ini: 'AI', name: 'AI Assistant',  role: 'full access',   bg: 'bg-violet-100 text-violet-700' },
+  { ini: 'SM', name: 'Sara M.',       role: 'view only',     bg: 'bg-slate-100 text-slate-600' },
+];
+
+const searchTabs = ['All', 'Projects', 'Messages', 'Items'];
+
+const kanbanCols = [
+  { name: 'TODO', tone: 'bg-slate-50 border-slate-200', cards: ['#1', '#4'] },
+  { name: 'QA',   tone: 'bg-sky-50 border-sky-200',     cards: ['#2'] },
+  { name: 'DONE', tone: 'bg-white border-slate-200',    cards: ['#5', '#6'], done: true },
+];
+
+const chatBars = [79, 82, 85];
+const chatReply = ['3 of 4 KRs on track (85%)', 'Risk: QA sign-off pending', 'Next: lock SSO rollout'];
+
+const techStack = [
   { label: 'Node.js',    logo: '/assets/logos/tech/nodejs.svg' },
   { label: 'MySQL',      logo: '/assets/logos/tech/mysql.svg' },
   { label: 'AWS',        logo: '/assets/logos/tech/aws.svg' },
@@ -69,6 +88,9 @@ const techStack: Tech[] = [
   { label: 'CSS',        logo: '/assets/logos/tech/css.svg' },
   { label: 'Tailwind',   logo: '/assets/logos/tech/tailwind.svg' },
 ];
+
+const dashHeader = 'px-3 py-2 font-mono text-[10px] uppercase tracking-wide text-slate-400';
+const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
 ---
 
 <section id="work" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
@@ -77,27 +99,216 @@ const techStack: Tech[] = [
     <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">03 — Arbeit</span>
     <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Meine Arbeit bei Alignment.io</h2>
     <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
-      Konkrete Features und Prozesse, die ich entwickelt habe.
+      Welche Features und Prozesse ich bei Alignment.io von Figma bis Produktion entwickelt habe — jede Karte mit einer kleinen Live-Demo.
     </p>
   </div>
 
-  <!-- Feature-Karten -->
-  <div class="mt-14 flex flex-col gap-10">
+  <!-- Karten -->
+  <div class="mt-14 flex flex-col gap-8">
     {features.map((f, i) => (
-      <article class="flex flex-col gap-6 rounded-2xl border border-slate-200 p-6 transition-shadow duration-200 hover:shadow-md sm:flex-row">
-        <img
-          src={f.image}
-          alt={f.alt}
-          class="h-44 w-full shrink-0 rounded-xl object-cover ring-1 ring-slate-200/60 sm:h-40 sm:w-60"
-        />
-        <div class="min-w-0">
+      <article class={`js-card relative rounded-2xl border border-slate-200 p-5 transition-shadow duration-200 hover:shadow-md sm:p-6 ${revealCard}`} data-demo={f.demo}>
+        <!-- Demo-Panel (dekorativ) -->
+        <div class={`js-demo ${revealPanel}`} aria-hidden="true">
+
+          {f.demo === 'dashboard' && (
+            <div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 shadow-sm">
+              <div class="flex border-b border-slate-100 bg-[#F9FAFC]">
+                <div class={`${dashHeader} flex-1`}>Teams</div>
+                <div class={`${dashHeader} hidden flex-1 md:block`}>SWOT</div>
+                <div class={`${dashHeader} flex-1`}>OKR Score</div>
+                <div class={`${dashHeader} hidden flex-1 md:block`}>Top 6</div>
+              </div>
+              {dashRows.map((r, j) => (
+                <div class="flex border-t border-slate-50">
+                  <div class={`${dashCell} text-[13px] font-medium text-slate-700`} data-row={j}>{r.team}</div>
+                  <div class={`${dashCell} hidden md:flex`} data-row={j}>
+                    <div class="flex flex-col items-start gap-1">
+                      <div class="flex gap-1">
+                        {r.swot[0].map((v, k) => (
+                          <span class={`grid h-4 w-5 place-items-center rounded font-mono text-[9px] font-bold tabular-nums ${swotTone[k]}`}>{v}</span>
+                        ))}
+                      </div>
+                      <div class="flex gap-1">
+                        {r.swot[1].map((v, k) => (
+                          <span class={`grid h-4 w-5 place-items-center rounded font-mono text-[9px] font-bold tabular-nums ${swotTone[k + 2]}`}>{v}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div class={`${dashCell} gap-2`} data-row={j}>
+                    <div class="h-1.5 w-20 overflow-hidden rounded-full bg-slate-100">
+                      <div class="js-fill h-full w-0 rounded-full bg-brand transition-[width] duration-1000 ease-out data-[in]:w-[var(--w)] motion-reduce:w-[var(--w)] motion-reduce:transition-none" style={`--w:${r.w}%`}></div>
+                    </div>
+                    <span class="js-num w-7 text-right font-mono text-[11px] font-bold tabular-nums text-slate-500" data-to={r.w}>0%</span>
+                  </div>
+                  <div class="hidden flex-1 px-3 py-2 items-end justify-start gap-[3px] h-[52px] md:flex" data-row={j}>
+                    {r.bars.map((h) => (
+                      <span class="js-bar w-[3px] rounded-sm bg-brand/40 h-0 transition-[height] duration-500 ease-out data-[in]:h-[var(--h)] motion-reduce:h-[var(--h)] motion-reduce:transition-none" style={`--h:${h * 3}px`}></span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {f.demo === 'auth' && (
+            <div class="mx-auto max-w-xs overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div class={`js-auth-el flex items-center justify-center gap-2 pb-4 ${revealUp}`}>
+                <img src="/assets/logos/alignment.png" alt="" class="h-6 w-6 rounded-md object-contain" />
+                <span class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-slate-700">Alignment</span>
+              </div>
+              <div class="space-y-2">
+                <div class={`js-auth-el flex items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 py-2 ${revealUp}`}>
+                  <svg viewBox="0 0 24 24" class="h-4 w-4"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2.1-2 3.2-4.8 3.2-7.8z"/><path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.6l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.8 0-5.2-1.9-6-4.5H2.2v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M6 14.3a6.6 6.6 0 0 1 0-4.2V7.3H2.2a11 11 0 0 0 0 9.8L6 14.3z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .5 4.1 1.6l3.1-3.1A11 11 0 0 0 2.2 7.3L6 10.1c.9-2.6 3.3-4.6 6-4.6z"/></svg>
+                  <span class="text-[12px] font-medium text-slate-600">Sign in with Google</span>
+                </div>
+                <div class={`js-auth-el flex items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 py-2 ${revealUp}`}>
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 fill-slate-900"><path d="M16.4 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.7-1.3-.1-2.5.7-3.1.7-.6 0-1.6-.7-2.7-.7-1.4 0-2.7.8-3.4 2-1.4 2.5-.4 6.3 1 8.3.7 1 1.5 2.1 2.5 2.1 1 0 1.4-.6 2.6-.6 1.2 0 1.5.6 2.6.6 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.1-.8-2.1-3.2zm-2-6c.5-.7.9-1.6.8-2.5-.8 0-1.8.5-2.4 1.2-.5.6-1 1.5-.8 2.4.9.1 1.8-.4 2.4-1.1z"/></svg>
+                  <span class="text-[12px] font-medium text-slate-600">Sign in with Apple</span>
+                </div>
+                <div class={`js-auth-el flex items-center gap-3 py-1 ${revealUp}`}>
+                  <span class="h-px flex-1 bg-slate-200"></span>
+                  <span class="font-mono text-[10px] uppercase tracking-wide text-slate-400">or</span>
+                  <span class="h-px flex-1 bg-slate-200"></span>
+                </div>
+                <div class={`js-auth-el flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-white ${revealUp}`}>
+                  <span class="text-[12px] font-semibold">Continue with SAML SSO</span>
+                  <span aria-hidden="true">→</span>
+                </div>
+              </div>
+              <div class={`js-auth-success mt-4 flex items-center justify-center gap-1.5 rounded-lg bg-emerald-50 py-1.5 text-emerald-700 ${revealPop}`}>
+                <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+                <span class="text-[12px] font-semibold">Authenticated</span>
+              </div>
+            </div>
+          )}
+
+          {f.demo === 'rbac' && (
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div class={`js-rbac-row mb-3 flex items-center justify-between ${revealLeft}`}>
+                <span class="text-[13px] font-semibold text-slate-700">Add Project Members</span>
+                <span class="rounded-md bg-brand px-2.5 py-1 font-mono text-[10px] font-bold text-white">Invite</span>
+              </div>
+              <div class="space-y-2">
+                {rbacRows.map((r) => (
+                  <div class={`js-rbac-row flex items-center gap-2.5 ${revealLeft}`}>
+                    <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-slate-100 font-mono text-[10px] font-bold text-slate-500">{r.ini}</span>
+                    <span class="flex-1 truncate text-[13px] text-slate-700">{r.name}</span>
+                    <span class={`js-badge inline-flex items-center gap-1 rounded-md px-2 py-1 font-mono text-[10px] font-semibold data-[lock]:animate-[wk-badge-lock_0.5s_ease_1] ${r.bg}`}>{r.role}
+                      <svg viewBox="0 0 24 24" class="h-2.5 w-2.5 opacity-60" fill="currentColor"><path d="M7 6V5a5 5 0 0 1 10 0v1h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1zm2 0h6V5a3 3 0 0 0-6 0v1z"/></svg>
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
+                <span class="flex items-center gap-1.5 text-[12px] text-slate-500">
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+                  Shareable external link
+                </span>
+                <span class="group js-toggle relative h-5 w-9 rounded-full bg-slate-200 transition-colors duration-300 data-[on]:bg-brand">
+                  <span class="absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 group-data-[on]:translate-x-4"></span>
+                </span>
+              </div>
+            </div>
+          )}
+
+          {f.demo === 'search' && (
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+              <div class="flex items-center gap-2 border-b border-slate-100 px-4 py-2.5">
+                <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+                <span class="font-mono text-[13px] text-slate-700"><span class="js-typed"></span><span class="js-caret inline-block h-[1em] w-[2px] translate-y-[2px] bg-brand align-middle animate-caret motion-reduce:hidden"></span></span>
+                <span class="ml-auto grid h-4 w-4 place-items-center rounded-full bg-slate-100 font-mono text-[10px] text-slate-400">✕</span>
+              </div>
+              <div class="flex gap-2 px-4 py-2">
+                {searchTabs.map((tab, i) => (
+                  <span class={`js-line rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold ${revealUp} ${i === 0 ? 'bg-brand/10 text-brand' : 'text-slate-400'}`}>{tab}</span>
+                ))}
+              </div>
+              <div class={`js-search-result flex items-start gap-3 border-t border-slate-50 px-4 py-3 ${revealUpMd}`}>
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand/10 font-mono text-[11px] font-bold text-brand">N</span>
+                <div class="min-w-0">
+                  <div class="text-[13px] font-semibold text-slate-800"><span class="js-highlight rounded-[3px] px-px transition-colors duration-500 data-[lit]:bg-brand/20">Exec</span> | Q2 2026 OKR Apple</div>
+                  <div class="text-[12px] text-slate-500">Is the software stable and predictable? Who tested it?</div>
+                  <div class="mt-0.5 font-mono text-[10px] text-slate-400">Nick Nikolaev · 13 days ago</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {f.demo === 'kanban' && (
+            <div class="relative grid grid-cols-3 gap-3">
+              {kanbanCols.map((col, ci) => (
+                <div class={`js-kb-col rounded-xl border p-2.5 ${revealUp} ${col.tone} ${col.done ? 'transition-colors duration-500 data-[flush]:border-emerald-300 data-[flush]:bg-emerald-50' : ''}`} data-col={ci} data-done={col.done ? '' : undefined}>
+                  <div class="mb-2 flex items-center gap-1.5">
+                    <span class="font-mono text-[10px] font-bold uppercase tracking-wide text-slate-500">{col.name}</span>
+                    {col.done && (
+                      <svg viewBox="0 0 24 24" class="h-3 w-3 text-emerald-500" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+                    )}
+                  </div>
+                  <div class="space-y-1.5" data-cards>
+                    {col.cards.map((tag) => (
+                      <div class={`js-kb-card flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 py-1.5 shadow-sm ${revealTiny}`}>
+                        <span class="h-1.5 w-1.5 rounded-sm bg-slate-300"></span>
+                        <span class="font-mono text-[11px] text-slate-500">{tag}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <!-- wandernde Karte (QA → DONE), per JS positioniert -->
+              <div class="js-kb-mover pointer-events-none absolute flex items-center gap-1.5 rounded-md border border-sky-300 bg-white px-2 py-1.5 opacity-0 shadow-md">
+                <span class="h-1.5 w-1.5 rounded-sm bg-sky-400"></span><span class="font-mono text-[11px] text-slate-600">#3</span>
+              </div>
+            </div>
+          )}
+
+          {f.demo === 'chat' && (
+            <div class="grid grid-cols-[1fr_1fr] gap-3">
+              <!-- Dashboard-Vorschau -->
+              <div class={`js-chat-left rounded-xl border border-slate-200 bg-white p-3 shadow-sm ${revealScaleSubtle}`}>
+                <div class="font-mono text-[10px] uppercase tracking-wide text-slate-400">Apple OKR · Q2</div>
+                <div class="mt-3 space-y-2.5">
+                  {chatBars.map((v) => (
+                    <div class="flex items-center gap-2">
+                      <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100"><div class="h-full rounded-full bg-brand/70" style={`width:${v}%`}></div></div>
+                      <span class="font-mono text-[10px] tabular-nums text-slate-400">{v}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <!-- Chat-Sidebar -->
+              <div class={`js-chat-sidebar flex flex-col rounded-xl border border-brand/20 bg-white p-3 shadow-sm ring-1 ring-brand/5 ${revealRight}`}>
+                <div class="flex items-center gap-1.5 border-b border-slate-100 pb-2">
+                  <span class="grid h-4 w-4 place-items-center rounded bg-brand text-white font-mono text-[8px] font-bold">AI</span>
+                  <span class="font-mono text-[10px] text-slate-400">12:54 PM</span>
+                </div>
+                <div class="mt-2 space-y-1.5">
+                  <div class={`js-chat-msg ml-auto max-w-[90%] rounded-lg rounded-br-sm bg-slate-100 px-2 py-1 text-[10.5px] text-slate-600 ${revealTiny}`}>How are we tracking on the Apple OKR this quarter?</div>
+                  <div class="js-chat-typing flex items-center gap-1 py-1">
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-300 [animation-delay:var(--delay)] animate-[wk-dot-bounce_1.2s_infinite] motion-reduce:animate-none" style="--delay:0s"></span>
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-300 [animation-delay:var(--delay)] animate-[wk-dot-bounce_1.2s_infinite] motion-reduce:animate-none" style="--delay:.15s"></span>
+                    <span class="h-1.5 w-1.5 rounded-full bg-slate-300 [animation-delay:var(--delay)] animate-[wk-dot-bounce_1.2s_infinite] motion-reduce:animate-none" style="--delay:.3s"></span>
+                  </div>
+                  <div class="js-chat-reply space-y-1">
+                    <div class={`js-chat-msg text-[10.5px] font-semibold text-slate-700 ${revealTiny}`}>Apple partnership — status:</div>
+                    {chatReply.map((tag) => (
+                      <div class={`js-chat-msg flex items-start gap-1.5 text-[10.5px] text-slate-600 ${revealTiny}`}><span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-brand"></span>{tag}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        <!-- Text -->
+        <div class="mt-5">
           <div class="flex flex-wrap items-center gap-2.5">
             <span class="font-mono text-xs text-slate-400">{String(i + 1).padStart(2, '0')}</span>
             <span class:list={[
               'rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide',
-              f.kind === 'process'
-                ? 'bg-slate-100 text-slate-500'
-                : 'bg-brand/10 text-brand',
+              f.kind === 'process' ? 'bg-slate-100 text-slate-500' : 'bg-brand/10 text-brand',
             ]}>
               {f.kind === 'process' ? 'Prozess' : 'Feature'}
             </span>
@@ -109,16 +320,158 @@ const techStack: Tech[] = [
     ))}
   </div>
 
-  <!-- Tech-Stack · Logo-Leiste (dezent, Hover = volle Brand-Farbe) -->
+  <!-- Tech-Stack · kompakte Logo-Leiste (grayscale → Hover volle Brand-Farbe) -->
   <div class="mt-16 border-t border-slate-200 pt-8">
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">Tech Stack</p>
     <ul class="mt-5 flex flex-wrap gap-2.5">
       {techStack.map((t) => (
-        <li class="group flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 opacity-70 transition hover:border-brand/30 hover:opacity-100">
-          <img src={t.logo} alt="" class="h-6 w-6 object-contain grayscale transition group-hover:grayscale-0" />
-          <span class="font-mono text-sm text-slate-700">{t.label}</span>
+        <li class="group flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 opacity-70 transition hover:border-brand/30 hover:opacity-100">
+          <img src={t.logo} alt="" class="h-4 w-4 object-contain grayscale transition group-hover:grayscale-0" />
+          <span class="font-mono text-xs text-slate-700">{t.label}</span>
         </li>
       ))}
     </ul>
   </div>
 </section>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function countUp(el: HTMLElement, to: number, dur = 600) {
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / dur);
+      el.textContent = Math.round(p * to) + '%';
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function appendDoneCard(root: HTMLElement) {
+    const doneCol = root.querySelector('[data-col="2"] [data-cards]');
+    if (!doneCol || doneCol.querySelector('[data-moved]')) return;
+    const card = document.createElement('div');
+    card.dataset.moved = '1';
+    card.className = 'flex items-center gap-1.5 rounded-md border border-emerald-200 bg-white px-2 py-1.5 shadow-sm';
+    card.innerHTML = '<span class="h-1.5 w-1.5 rounded-sm bg-emerald-400"></span><span class="font-mono text-[11px] text-slate-600">#3</span>';
+    doneCol.appendChild(card);
+    root.querySelector('[data-done]')?.toggleAttribute('data-flush', true);
+  }
+
+  function setEndState(root: HTMLElement, type: string) {
+    root.querySelectorAll(
+      '.js-line, [data-row], .js-fill, .js-bar, .js-auth-el, .js-auth-success, .js-rbac-row, .js-search-result, .js-kb-col, .js-kb-card, .js-chat-left, .js-chat-sidebar, .js-chat-msg'
+    ).forEach((el) => el.toggleAttribute('data-in', true));
+    if (type === 'dashboard') root.querySelectorAll<HTMLElement>('.js-num').forEach((n) => { n.textContent = n.dataset.to + '%'; });
+    if (type === 'rbac') root.querySelector('.js-toggle')?.toggleAttribute('data-on', true);
+    if (type === 'search') {
+      const out = root.querySelector('.js-typed'); if (out) out.textContent = 'exec';
+      root.querySelector('.js-highlight')?.toggleAttribute('data-lit', true);
+      const caret = root.querySelector<HTMLElement>('.js-caret'); if (caret) caret.hidden = true;
+    }
+    if (type === 'kanban') appendDoneCard(root);
+    if (type === 'chat') {
+      const typing = root.querySelector<HTMLElement>('.js-chat-typing'); if (typing) typing.hidden = true;
+    }
+  }
+
+  function playDemo(card: HTMLElement) {
+    const type = card.dataset.demo as string;
+    const root = card.querySelector('.js-demo') as HTMLElement;
+    if (!root) return;
+
+    if (reduce) { setEndState(root, type); return; }
+
+    if (type === 'dashboard') {
+      const rowCount = 4;
+      for (let j = 0; j < rowCount; j++) {
+        setTimeout(() => root.querySelectorAll(`[data-row="${j}"]`).forEach((el) => el.toggleAttribute('data-in', true)), j * 80);
+      }
+      setTimeout(() => {
+        root.querySelectorAll('.js-fill').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), j * 120));
+        root.querySelectorAll<HTMLElement>('.js-num').forEach((n, j) => setTimeout(() => countUp(n, Number(n.dataset.to)), j * 120));
+        root.querySelectorAll('.js-bar').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), 200 + j * 40));
+      }, rowCount * 80 + 60);
+    }
+
+    if (type === 'auth') {
+      const els = root.querySelectorAll('.js-auth-el');
+      els.forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), 120 + j * 120));
+      setTimeout(() => root.querySelector('.js-auth-success')?.toggleAttribute('data-in', true), 120 + els.length * 120 + 250);
+    }
+
+    if (type === 'rbac') {
+      root.querySelectorAll('.js-rbac-row').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), j * 110));
+      setTimeout(() => root.querySelectorAll('.js-badge').forEach((b) => b.toggleAttribute('data-lock', true)), 400);
+      setTimeout(() => root.querySelector('.js-toggle')?.toggleAttribute('data-on', true), 900);
+    }
+
+    if (type === 'search') {
+      const out = root.querySelector('.js-typed') as HTMLElement;
+      const text = 'exec';
+      if (out) {
+        out.textContent = '';
+        let k = 0;
+        setTimeout(() => {
+          const id = setInterval(() => { out.textContent = text.slice(0, ++k); if (k >= text.length) clearInterval(id); }, 90);
+        }, 200);
+      }
+      root.querySelectorAll('.js-line').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), 500 + j * 60));
+      setTimeout(() => root.querySelector('.js-search-result')?.toggleAttribute('data-in', true), 700);
+      setTimeout(() => root.querySelector('.js-highlight')?.toggleAttribute('data-lit', true), 950);
+    }
+
+    if (type === 'kanban') {
+      root.querySelectorAll('.js-kb-col').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), j * 100));
+      root.querySelectorAll('.js-kb-card').forEach((el, j) => setTimeout(() => el.toggleAttribute('data-in', true), 250 + j * 80));
+      setTimeout(() => {
+        const mover = root.querySelector('.js-kb-mover') as HTMLElement;
+        const qaCol = root.querySelector('[data-col="1"]') as HTMLElement;
+        const doneCol = root.querySelector('[data-col="2"]') as HTMLElement;
+        const wrap = root.firstElementChild as HTMLElement;
+        if (!mover || !qaCol || !doneCol || !wrap) return;
+        const wrapRect = wrap.getBoundingClientRect();
+        const startRect = qaCol.getBoundingClientRect();
+        mover.style.left = (startRect.left - wrapRect.left) + 'px';
+        mover.style.top = (startRect.top - wrapRect.top + 26) + 'px';
+        mover.style.width = startRect.width + 'px';
+        mover.style.transition = 'none';
+        mover.style.transform = 'translate(0,0)';
+        mover.style.opacity = '1';
+        const endRect = doneCol.getBoundingClientRect();
+        const dx = endRect.left - startRect.left;
+        const dy = (endRect.top - startRect.top) + 56;
+        requestAnimationFrame(() => {
+          mover.style.transition = 'transform .7s cubic-bezier(.5,0,.2,1), opacity .3s ease';
+          mover.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        setTimeout(() => { mover.style.opacity = '0'; appendDoneCard(root); }, 760);
+      }, 600);
+    }
+
+    if (type === 'chat') {
+      setTimeout(() => root.querySelector('.js-chat-left')?.toggleAttribute('data-in', true), 0);
+      setTimeout(() => root.querySelector('.js-chat-sidebar')?.toggleAttribute('data-in', true), 200);
+      setTimeout(() => root.querySelector('.js-chat-msg')?.toggleAttribute('data-in', true), 400);
+      const typing = root.querySelector<HTMLElement>('.js-chat-typing');
+      const replies = root.querySelectorAll('.js-chat-reply .js-chat-msg');
+      setTimeout(() => {
+        if (typing) typing.hidden = true;
+        replies.forEach((m, j) => setTimeout(() => m.toggleAttribute('data-in', true), j * 80));
+      }, 900);
+    }
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const card = e.target as HTMLElement;
+      card.toggleAttribute('data-in', true);
+      card.querySelector('.js-demo')?.toggleAttribute('data-in', true);
+      if (!card.dataset.played) { card.dataset.played = '1'; setTimeout(() => playDemo(card), 220); }
+      io.unobserve(card);
+    }
+  }, { threshold: 0.2, rootMargin: '0px 0px -12% 0px' });
+
+  document.querySelectorAll<HTMLElement>('.js-card').forEach((c) => io.observe(c));
+</script>

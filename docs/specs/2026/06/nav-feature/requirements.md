@@ -22,23 +22,22 @@ Zielgruppe: Recruiter und Gründer, die entweder Deutsch oder Englisch als Sprac
 
 ```
 src/pages/
+  index.astro          → HTTP 301-Redirect zu /de
   de/
     index.astro        → deutschi Homepage
   en/
     index.astro        → englischi Homepage
 ```
 
-D Redirect-Logik läuft über `astro.config.mjs` (nöd über en separati `index.astro`):
+D Redirect-Logik läuft über `src/pages/index.astro` mit `Astro.redirect()`:
 
-```js
-// astro.config.mjs
-export default defineConfig({
-  redirects: { '/': '/de' },
-  ...
-});
+```astro
+---
+return Astro.redirect('/de', 301);
+---
 ```
 
-> Grund: `redirects`-Config isch dr zuverlässigi Weg für static Astro-Builds — generiert en Meta-Refresh + canonical-Tag.
+> Grund: `Astro.redirect()` sendet en echte HTTP 301-Header — kei HTML-Seite wird generiert, kein "Redirecting to /de"-Flash uf Mobile.
 
 ---
 
@@ -187,14 +186,14 @@ src/
     Mission.astro            ← akzeptiert translation-Prop
     Footer.astro             ← akzeptiert lang + translation
     Work.astro               ← kein Prop (Ausnahme)
-astro.config.mjs             ← redirects: { '/': '/de' }
+astro.config.mjs             ← kein redirects-Eintrag mehr
 ```
 
 ---
 
 ## Fertig wenn
 
-- [x] `/` redirected zu `/de` via `astro.config.mjs`
+- [x] `/` redirected zu `/de` via `src/pages/index.astro` (`Astro.redirect('/de', 301)`) — kein Meta-Refresh-Flash
 - [x] `src/pages/de/index.astro` existiert und rendert d deutschi Homepage
 - [x] `src/pages/en/index.astro` existiert und rendert d englischi Homepage
 - [x] `src/i18n/translations.ts` enthält alli Keys (snake_case, zwei Sprache)

@@ -74,6 +74,19 @@ const links = [
     bar_3.classList.toggle('-rotate-45', open);
   });
 
+  // We close the mobile nav menu when a nav link is clicked for better UX
+  mobile_menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if ( mobile_menu.classList.contains('hidden') ) return;
+
+      mobile_menu.classList.add('hidden');
+      hamburger.setAttribute('aria-expanded', 'false');
+      bar_1.classList.remove('translate-y-2', 'rotate-45');
+      bar_2.classList.remove('opacity-0');
+      bar_3.classList.remove('-translate-y-2', '-rotate-45');
+    });
+  });
+
   // Language toggle
   const current_lang = location.pathname.startsWith('/en') ? 'en' : 'de';
   const lang_toggle = document.getElementById('lang-toggle') as HTMLElement;

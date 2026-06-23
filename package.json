@@ -13,8 +13,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "astro": "^5.0.0",
+    "@playwright/test": "^1.61.0",
     "@tailwindcss/vite": "^4.3.0",
-    "tailwindcss": "^4.3.0"
+    "astro": "^5.0.0",
+    "linkedom": "^0.18.12",
+    "tailwindcss": "^4.3.0",
+    "vitest": "^4.1.9"
   }
 }

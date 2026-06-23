@@ -104,6 +104,7 @@ Alli Keys sind snake_case. Überblick alli Sekzione:
 | `hero` | `label`, `name_label`, `location_label`, `location_value`, `role_label`, `role_value`, `mode_label`, `mode_value`, `status_label`, `status_value`, `prefix`, `sub`, `cta_experience`, `cta_contact`, `scroll` |
 | `social_proof` | `heading` |
 | `experience` | `label`, `heading`, `work_badge`, `education_badge`, `alignment_role`, `alignment_description`, `alignment_location`, `alignment_link`, `naval_school`, `naval_description`, `naval_location`, `naval_link` |
+| `work` | `label`, `heading`, `subtitle`, `process_badge`, `feature_badge`, `features[]` |
 | `impact` | `label`, `heading`, `subtitle`, `kpis[]` |
 | `ai_workflow` | `label`, `heading`, `subtitle`, `optional_badge`, `why_label`, `steps[]` |
 | `faq` | `label`, `heading`, `items[]` |
@@ -136,7 +137,7 @@ Kein client-seitiger Text-Swap — alli `data-i18n`-Attribute wurden durch Astro
 | Element | Datei | Grund |
 |---------|-------|-------|
 | Typing-Effekt (`ROLES`-Array: `'Founding Eng'`, `'Software Eng'`, ...) | `Hero.astro` | Englischi Job-Titel sin international standard |
-| `Work.astro` Sektion komplett | `Work.astro` | Kein Übersetzigs-Scope |
+| Visuelle Demo-Elemente in `Work.astro` (RBAC-Labels, Kanban-Spaltenname, Chat-Nachrichte, Search-Ergebnis) | `Work.astro` | Technischi/dekorative UI-Demo-Inhalte |
 | Visuelle Demo-Elemente (Typewriter-Text, Terminal-Output, Dateinam `"01-feature.md"`, `checkItems`) | `AiWorkflow.astro` | Technischi/dekorative Inhalte |
 | `"Nick Nikolaev"` + `"© 2026 Nick Nikolaev"` | `Footer.astro` | Eigenname + rechtlicher Standard |
 
@@ -185,7 +186,7 @@ src/
     Faq.astro                ← akzeptiert translation-Prop
     Mission.astro            ← akzeptiert translation-Prop
     Footer.astro             ← akzeptiert lang + translation
-    Work.astro               ← kein Prop (Ausnahme)
+    Work.astro               ← akzeptiert translation-Prop
 astro.config.mjs             ← kein redirects-Eintrag mehr
 ```
 
@@ -203,7 +204,7 @@ astro.config.mjs             ← kein redirects-Eintrag mehr
 - [x] Click uf inaktivi Sprach navigiert direkt zur neue URL — kei Animation
 - [x] Alli `data-i18n`-Attribute sin durch Astro-Props ersetzt — kein client-seitiger Text-Swap
 - [x] Typing-Effekt in `Hero.astro` bliibt unverändert (englischi Rollen-Titel)
-- [x] `Work.astro` het kein Übersetzungs-Scope
+- [x] `Work.astro` akzeptiert `translation`-Prop; Label, Heading, Subtitle, Card-Titel/Texte und Badges sind übersetzt
 - [x] Visuelle Demo-Elemente in `AiWorkflow.astro` sin unverändert
 - [x] "Nick Nikolaev" und "© 2026 Nick Nikolaev" in `Footer.astro` sin unverändert
 - [x] `prefers-reduced-motion`: kein Effekt — Toggle navigiert immer direkt

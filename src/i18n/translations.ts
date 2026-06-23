@@ -48,6 +48,40 @@ export const translations = {
       naval_location: 'Bulgarien',
       naval_link: 'Transcript ansehen ↗',
     },
+    work: {
+      label: '03 — Arbeit',
+      heading: 'Meine Arbeit bei Alignment.io',
+      subtitle:
+        'Welche Features und Prozesse ich bei Alignment.io von Figma bis Produktion entwickelt habe — jede Karte mit einer kleinen Live-Demo.',
+      process_badge: 'Prozess',
+      feature_badge: 'Feature',
+      features: [
+        {
+          title: 'Dashboard',
+          text: 'Workspace-weiter Dashboard-Arbeitsbereich von Figma-Design bis zum fertigen Feature — für das vierteljährliche Alignment-Tracking der Teams.',
+        },
+        {
+          title: 'Authentifizierung',
+          text: 'Authentifizierungs-Flows umgesetzt: Google OAuth, Apple OAuth und SAML SSO für Enterprise-Kunden.',
+        },
+        {
+          title: 'RBAC',
+          text: 'Rollenbasierte Zugriffsteuerung — workspace-weit, team-weit und projekt-weit, plus teilbare externe Links.',
+        },
+        {
+          title: 'Suche',
+          text: 'Globale Suche powered by ElasticSearch — über alle Nachrichten, Items und Projekte, mit Match-Highlighting.',
+        },
+        {
+          title: 'Release-Verwaltung',
+          text: 'QA- und Release-Prozesse aufgebaut; ein 5-köpfiges Team in einem agilen Umfeld geleitet — von Todo über QA zu Done.',
+        },
+        {
+          title: 'KI-Chat-System',
+          text: 'Ein Echtzeit-KI-Chat-System entwickelt, das direkt auf den Dashboard-Daten arbeitet — strukturierte Antworten statt bloßem Chat.',
+        },
+      ],
+    },
     impact: {
       label: '04 — Auswirkungen',
       heading: 'Was ich bei Alignment.io erreicht habe',
@@ -186,6 +220,40 @@ export const translations = {
       naval_description: 'Focus: secure systems, networks, cryptography.',
       naval_location: 'Bulgaria',
       naval_link: 'View transcript ↗',
+    },
+    work: {
+      label: '03 — Work',
+      heading: 'My Work at Alignment.io',
+      subtitle:
+        'Features and processes I built at Alignment.io from Figma to production — each card with a small live demo.',
+      process_badge: 'Process',
+      feature_badge: 'Feature',
+      features: [
+        {
+          title: 'Dashboard',
+          text: 'Workspace-wide dashboard from Figma design to shipped feature — for quarterly alignment tracking across teams.',
+        },
+        {
+          title: 'Authentication',
+          text: 'Authentication flows built: Google OAuth, Apple OAuth and SAML SSO for enterprise clients.',
+        },
+        {
+          title: 'RBAC',
+          text: 'Role-based access control — workspace-wide, team-wide and project-wide, plus shareable external links.',
+        },
+        {
+          title: 'Search',
+          text: 'Global search powered by ElasticSearch — across all messages, items and projects, with match highlighting.',
+        },
+        {
+          title: 'Release Management',
+          text: 'Built QA and release processes; led a team of 5 in an agile environment — from Todo through QA to Done.',
+        },
+        {
+          title: 'AI Chat System',
+          text: 'Built a real-time AI chat system working directly on dashboard data — structured answers instead of plain chat.',
+        },
+      ],
     },
     impact: {
       label: '04 — Impact',

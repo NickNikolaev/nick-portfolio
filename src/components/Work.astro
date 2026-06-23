@@ -1,39 +1,26 @@
 ---
+import type { Translation } from '../i18n/translations';
+
 type DemoType = 'dashboard' | 'auth' | 'rbac' | 'search' | 'kanban' | 'chat';
 
-interface Card {
-  title: string;
-  text: string;
-  kind: 'feature' | 'process';
-  demo: DemoType;
+interface Props {
+  translation: Translation;
 }
 
-const features: Card[] = [
-  {
-    title: 'Dashboard', kind: 'feature', demo: 'dashboard',
-    text: 'Workspace-weiter Dashboard-Arbeitsbereich von Figma-Design bis zum fertigen Feature — für das vierteljährliche Alignment-Tracking der Teams.',
-  },
-  {
-    title: 'Authentifizierung', kind: 'feature', demo: 'auth',
-    text: 'Authentifizierungs-Flows umgesetzt: Google OAuth, Apple OAuth und SAML SSO für Enterprise-Kunden.',
-  },
-  {
-    title: 'RBAC', kind: 'feature', demo: 'rbac',
-    text: 'Rollenbasierte Zugriffsteuerung — workspace-weit, team-weit und projekt-weit, plus teilbare externe Links.',
-  },
-  {
-    title: 'Suche', kind: 'feature', demo: 'search',
-    text: 'Globale Suche powered by ElasticSearch — über alle Nachrichten, Items und Projekte, mit Match-Highlighting.',
-  },
-  {
-    title: 'Release-Verwaltung', kind: 'process', demo: 'kanban',
-    text: 'QA- und Release-Prozesse aufgebaut; ein 5-köpfiges Team in einem agilen Umfeld geleitet — von Todo über QA zu Done.',
-  },
-  {
-    title: 'KI-Chat-System', kind: 'feature', demo: 'chat',
-    text: 'Ein Echtzeit-KI-Chat-System entwickelt, das direkt auf den Dashboard-Daten arbeitet — strukturierte Antworten statt bloßem Chat.',
-  },
+const { translation } = Astro.props;
+const t = translation.work;
+
+// Demo metadata stays in the component; copy comes from the translation
+const cardMeta: { kind: 'feature' | 'process'; demo: DemoType }[] = [
+  { kind: 'feature', demo: 'dashboard' },
+  { kind: 'feature', demo: 'auth' },
+  { kind: 'feature', demo: 'rbac' },
+  { kind: 'feature', demo: 'search' },
+  { kind: 'process', demo: 'kanban' },
+  { kind: 'feature', demo: 'chat' },
 ];
+
+const features = t.features.map((f, i) => ({ ...f, ...cardMeta[i] }));
 
 const revealCard = 'opacity-0 translate-y-[18px] transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:translate-y-0 motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none';
 const revealPanel = 'opacity-0 scale-95 transition-[opacity,transform] duration-500 ease-out data-[in]:opacity-100 data-[in]:scale-100 motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:transition-none';
@@ -51,7 +38,7 @@ const dashRows = [
   { team: 'Design',    w: 65, swot: [[11, 7], [7, 5, 7]], bars: [1, 2, 5, 7, 8, 6] },
   { team: 'Marketing', w: 30, swot: [[5, 4], [12, 3, 7]], bars: [3, 4, 3, 5, 4, 2] },
 ];
-// SWOT-Chip-Tönung nach Position (Strengths · Weaknesses · Opportunities · Threats · n/a)
+// SWOT chip tones by position (Strengths · Weaknesses · Opportunities · Threats · n/a)
 const swotTone = [
   'bg-slate-100 text-slate-600',
   'bg-amber-100 text-amber-700',
@@ -96,18 +83,18 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
 <section id="work" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
   <!-- Header -->
   <div class="flex flex-col gap-3">
-    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">03 — Arbeit</span>
-    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">Meine Arbeit bei Alignment.io</h2>
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.label}</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{t.heading}</h2>
     <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
-      Welche Features und Prozesse ich bei Alignment.io von Figma bis Produktion entwickelt habe — jede Karte mit einer kleinen Live-Demo.
+      {t.subtitle}
     </p>
   </div>
 
-  <!-- Karten -->
+  <!-- Cards -->
   <div class="mt-14 flex flex-col gap-8">
     {features.map((f, i) => (
       <article class={`js-card relative rounded-2xl border border-slate-200 p-5 transition-shadow duration-200 hover:shadow-md sm:p-6 ${revealCard}`} data-demo={f.demo}>
-        <!-- Demo-Panel (dekorativ) -->
+        <!-- Demo panel (decorative) -->
         <div class={`js-demo ${revealPanel}`} aria-hidden="true">
 
           {f.demo === 'dashboard' && (
@@ -255,7 +242,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
                   </div>
                 </div>
               ))}
-              <!-- wandernde Karte (QA → DONE), per JS positioniert -->
+              <!-- moving card (QA → DONE), positioned via JS -->
               <div class="js-kb-mover pointer-events-none absolute flex items-center gap-1.5 rounded-md border border-sky-300 bg-white px-2 py-1.5 opacity-0 shadow-md">
                 <span class="h-1.5 w-1.5 rounded-sm bg-sky-400"></span><span class="font-mono text-[11px] text-slate-600">#3</span>
               </div>
@@ -264,7 +251,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
 
           {f.demo === 'chat' && (
             <div class="grid grid-cols-[1fr_1fr] gap-3">
-              <!-- Dashboard-Vorschau -->
+              <!-- Dashboard preview -->
               <div class={`js-chat-left rounded-xl border border-slate-200 bg-white p-3 shadow-sm ${revealScaleSubtle}`}>
                 <div class="font-mono text-[10px] uppercase tracking-wide text-slate-400">Apple OKR · Q2</div>
                 <div class="mt-3 space-y-2.5">
@@ -276,7 +263,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
                   ))}
                 </div>
               </div>
-              <!-- Chat-Sidebar -->
+              <!-- Chat sidebar -->
               <div class={`js-chat-sidebar flex flex-col rounded-xl border border-brand/20 bg-white p-3 shadow-sm ring-1 ring-brand/5 ${revealRight}`}>
                 <div class="flex items-center gap-1.5 border-b border-slate-100 pb-2">
                   <span class="grid h-4 w-4 place-items-center rounded bg-brand text-white font-mono text-[8px] font-bold">AI</span>
@@ -302,7 +289,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
 
         </div>
 
-        <!-- Text -->
+        <!-- Copy -->
         <div class="mt-5">
           <div class="flex flex-wrap items-center gap-2.5">
             <span class="font-mono text-xs text-slate-400">{String(i + 1).padStart(2, '0')}</span>
@@ -310,7 +297,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
               'rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wide',
               f.kind === 'process' ? 'bg-slate-100 text-slate-500' : 'bg-brand/10 text-brand',
             ]}>
-              {f.kind === 'process' ? 'Prozess' : 'Feature'}
+              {f.kind === 'process' ? t.process_badge : t.feature_badge}
             </span>
           </div>
           <h3 class="mt-3 text-xl font-bold text-slate-900">{f.title}</h3>
@@ -320,7 +307,7 @@ const dashCell = `flex-1 px-3 py-2 flex items-center ${revealUp}`;
     ))}
   </div>
 
-  <!-- Tech-Stack · kompakte Logo-Leiste (grayscale → Hover volle Brand-Farbe) -->
+  <!-- Tech Stack · compact logo bar (grayscale → hover full brand colour) -->
   <div class="mt-16 border-t border-slate-200 pt-8">
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">Tech Stack</p>
     <ul class="mt-5 flex flex-wrap gap-2.5">

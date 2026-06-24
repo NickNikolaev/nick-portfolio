@@ -37,6 +37,7 @@ export const translations = {
     experience: {
       label: '02 — Erfahrung',
       heading: 'Mein Hintergrund',
+      subtitle: 'Mein beruflicher Werdegang und meine akademische Ausbildung auf einen Blick.',
       work_badge: 'Arbeit',
       education_badge: 'Ausbildung',
       alignment_role: 'Gründungsingenieur',
@@ -210,6 +211,7 @@ export const translations = {
     experience: {
       label: '02 — Experience',
       heading: 'My Background',
+      subtitle: 'My professional journey and academic background at a glance.',
       work_badge: 'Work',
       education_badge: 'Education',
       alignment_role: 'Founding Engineer',

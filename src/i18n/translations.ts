@@ -44,7 +44,7 @@ export const translations = {
       alignment_description: 'KI-SaaS für Geschäftsstrategie.',
       alignment_location: 'Remote · StartX, Kalifornien, USA',
       alignment_link: 'Mehr zu meiner Arbeit →',
-      naval_school: 'Naval Akademie Nikola Vaptsarov',
+      naval_school: 'Marineakademie „Nikola J. Wapzarow“',
       naval_description: 'Fokus: sichere Systeme, Netzwerke, Kryptografie.',
       naval_location: 'Bulgarien',
       naval_link: 'Transcript ansehen ↗',

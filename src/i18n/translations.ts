@@ -147,7 +147,7 @@ export const translations = {
         { question: 'Wann kannst du anfangen?', answer: 'Sofort verfügbar.' },
         {
           question: 'Remote oder vor Ort?',
-          answer: 'Vor Ort — deutschsprachige Schweiz. Umzug möglich.',
+          answer: 'Vor Ort in Zürich.',
         },
         { question: 'Festanstellung oder Freelance?', answer: 'Nur Festanstellung.' },
         {
@@ -321,7 +321,7 @@ export const translations = {
         { question: 'When can you start?', answer: 'Available immediately.' },
         {
           question: 'Remote or on-site?',
-          answer: 'On-site — German-speaking Switzerland. Relocation possible.',
+          answer: 'On-site in Zurich.',
         },
         { question: 'Full-time employment or freelance?', answer: 'Full-time employment only.' },
         {

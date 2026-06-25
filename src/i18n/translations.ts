@@ -86,12 +86,12 @@ export const translations = {
     impact: {
       label: '04 — Auswirkungen',
       heading: 'Was ich bei Alignment.io erreicht habe',
-      subtitle: 'Vier messbare Kennzahlen aus meiner Zeit als Gründungsingenieur.',
+      subtitle: 'Realer Impact in Infra, Prozess und Enterprise.',
       kpis: [
-        { value: '1000+', label: 'Nachrichten zugestellt' },
-        { value: '100+', label: 'Aktive Nutzer unterstützt' },
-        { value: '99.9%', label: 'Plattform-Verfügbarkeit' },
-        { value: '50+', label: 'Releases ausgeliefert' },
+        { value: '1', label: 'SSO-Kunde onboarded' },
+        { value: '5', label: 'Ingenieure geführt' },
+        { value: '3+', label: 'Jahre als Gründungsingenieur' },
+        { value: '2', label: 'Prozesse integriert (QA + Agile)' },
       ],
     },
     ai_workflow: {
@@ -260,12 +260,12 @@ export const translations = {
     impact: {
       label: '04 — Impact',
       heading: 'What I achieved at Alignment.io',
-      subtitle: 'Four measurable metrics from my time as a founding engineer.',
+      subtitle: 'Real impact across infra, process, and enterprise.',
       kpis: [
-        { value: '1000+', label: 'Messages delivered' },
-        { value: '100+', label: 'Active users supported' },
-        { value: '99.9%', label: 'Platform uptime' },
-        { value: '50+', label: 'Releases shipped' },
+        { value: '1', label: 'SSO Customer Onboarded' },
+        { value: '5', label: 'Engineers Led' },
+        { value: '3+', label: 'Years as Founding Engineer' },
+        { value: '2', label: 'Processes Integrated (QA + Agile)' },
       ],
     },
     ai_workflow: {

@@ -10,7 +10,7 @@ export const translations = {
       intro: 'Intro',
       experience: 'Erfahrung',
       work: 'Arbeit',
-      impact: 'Auswirkungen',
+      tasks: 'Aufgaben',
       ai_workflow: 'KI-Workflow',
       faq: 'FAQ',
     },
@@ -83,15 +83,51 @@ export const translations = {
         },
       ],
     },
-    impact: {
-      label: '04 — Auswirkungen',
-      heading: 'Was ich bei Alignment.io erreicht habe',
-      subtitle: 'Realer Impact in Infra, Prozess und Enterprise.',
-      kpis: [
-        { value: '1', label: 'SSO-Kunde onboarded' },
-        { value: '5', label: 'Ingenieure geführt' },
-        { value: '3+', label: 'Jahre als Gründungsingenieur' },
-        { value: '2', label: 'Prozesse integriert (QA + Agile)' },
+    tasks: {
+      label: '04 — Aufgaben',
+      heading: 'Was ich bei Alignment.io gemacht habe',
+      subtitle: 'Meine Aufgaben und Verantwortlichkeiten als Gründungsingenieur.',
+      items: [
+        {
+          title: 'Frontend-Entwicklung',
+          bullets: [
+            'Frontend-Komponenten entworfen und umgesetzt',
+            'Custom WebSocket-Bibliothek für den Browser entwickelt',
+            'UI-Design mit HTML, CSS und Tailwind umgesetzt',
+          ],
+        },
+        {
+          title: 'Backend-Entwicklung',
+          bullets: [
+            'REST-API-Endpunkte implementiert',
+            'Datenmigrations-Skripte geschrieben',
+            'WebSocket-Server-Bibliothek entwickelt',
+          ],
+        },
+        {
+          title: 'Sicherheit',
+          bullets: [
+            'Middleware-Sicherheitsfunktionen für die API implementiert',
+            'Authentifizierungs-Flows konzipiert und umgesetzt',
+            'Sicherheitsrelevante Code-Reviews durchgeführt',
+          ],
+        },
+        {
+          title: 'Datenbank',
+          bullets: [
+            'SQL-Abfragen für Produkt-Features geschrieben',
+            'Schema- und Tabellenänderungen mit dem CTO koordiniert',
+            'Abfragen optimiert und Materialized Views eingeführt',
+          ],
+        },
+        {
+          title: 'Testing & Release',
+          bullets: [
+            'Eng mit Manual-QA-Ingenieuren zusammengearbeitet',
+            'CI/CD-Pipelines für die Releaseverwaltung ausgelöst',
+            'Releases in einem agilen Umfeld koordiniert',
+          ],
+        },
       ],
     },
     ai_workflow: {
@@ -184,7 +220,7 @@ export const translations = {
       intro: 'Intro',
       experience: 'Experience',
       work: 'Work',
-      impact: 'Impact',
+      tasks: 'Tasks',
       ai_workflow: 'AI Workflow',
       faq: 'FAQ',
     },
@@ -257,15 +293,51 @@ export const translations = {
         },
       ],
     },
-    impact: {
-      label: '04 — Impact',
-      heading: 'What I achieved at Alignment.io',
-      subtitle: 'Real impact across infra, process, and enterprise.',
-      kpis: [
-        { value: '1', label: 'SSO Customer Onboarded' },
-        { value: '5', label: 'Engineers Led' },
-        { value: '3+', label: 'Years as Founding Engineer' },
-        { value: '2', label: 'Processes Integrated (QA + Agile)' },
+    tasks: {
+      label: '04 — Tasks',
+      heading: 'What I did at Alignment.io',
+      subtitle: 'My responsibilities as a founding engineer.',
+      items: [
+        {
+          title: 'Frontend Development',
+          bullets: [
+            'Designed and built frontend components',
+            'Built a custom WebSocket library for the browser',
+            'Implemented UI design with HTML, CSS and Tailwind',
+          ],
+        },
+        {
+          title: 'Backend Development',
+          bullets: [
+            'Implemented REST API endpoints',
+            'Wrote data migration scripts',
+            'Built a WebSocket server library',
+          ],
+        },
+        {
+          title: 'Security',
+          bullets: [
+            'Implemented middleware security features for the API',
+            'Designed and implemented authentication flows',
+            'Conducted security-focused code reviews',
+          ],
+        },
+        {
+          title: 'Database',
+          bullets: [
+            'Wrote SQL queries for product features',
+            'Coordinated schema and table changes with the CTO',
+            'Optimized queries and introduced materialized views',
+          ],
+        },
+        {
+          title: 'Testing & Release',
+          bullets: [
+            'Worked closely with manual QA engineers',
+            'Triggered CI/CD pipelines for release management',
+            'Coordinated releases in an agile environment',
+          ],
+        },
       ],
     },
     ai_workflow: {

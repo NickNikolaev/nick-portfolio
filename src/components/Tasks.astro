@@ -1,0 +1,91 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  translation: Translation;
+}
+
+const { translation } = Astro.props;
+const t = translation.tasks;
+
+// Icon-Reihenfolge ist fix und entspricht 1:1 der Reihenfolge in t.items.
+const icons = ['monitor', 'server', 'shield', 'database', 'flask-conical'] as const;
+const tasks = t.items.map((item, i) => ({ ...item, icon: icons[i] }));
+
+// Identisch zur Impact-Kachel, aber taller + top-aligned für Icon/Titel/Bullets.
+const tile_class =
+  'relative isolate flex min-h-[220px] flex-col justify-start overflow-hidden rounded-2xl bg-brand p-7 shadow-sm ring-1 ring-brand/20 transition duration-200 hover:-translate-y-0.5 hover:shadow-md ' +
+  'bg-[radial-gradient(70%_80%_at_12%_18%,#037873_0%,transparent_60%),radial-gradient(70%_80%_at_92%_88%,#014b4a_0%,transparent_62%)] ' +
+  'before:pointer-events-none before:absolute before:inset-0 before:z-0 before:animate-aurora before:bg-[linear-gradient(120deg,#014b4a_0%,#026766_25%,#1ccdb9_50%,#026766_75%,#014b4a_100%)] before:bg-size-[220%_220%] before:content-[""] motion-reduce:before:animate-none ' +
+  'after:pointer-events-none after:absolute after:inset-0 after:z-[1] after:bg-[linear-gradient(180deg,rgba(1,40,40,0)_35%,rgba(1,40,40,0.4)_100%)] after:content-[""]';
+
+const icon_class = 'relative z-[2] h-7 w-7 shrink-0 text-white';
+const icon_stroke = { fill: 'none', stroke: 'currentColor', 'stroke-width': '1.5', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
+---
+
+<section id="tasks" class="mx-auto max-w-3xl px-6 py-20 scroll-mt-16">
+  <!-- Header -->
+  <div class="flex flex-col gap-3">
+    <span class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{t.label}</span>
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{t.heading}</h2>
+    <p class="max-w-2xl text-[15px] leading-relaxed text-slate-500">
+      {t.subtitle}
+    </p>
+  </div>
+
+  <!-- Cards · 2-Spalten Desktop (letzte zentriert) / 1 Spalte Mobile -->
+  <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
+    {tasks.map((task, i) => (
+      <div class={`${tile_class} ${i === 4 ? 'sm:col-span-2 sm:mx-auto sm:max-w-sm' : ''}`}>
+
+        {task.icon === 'monitor' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        )}
+        {task.icon === 'server' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+            <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        )}
+        {task.icon === 'shield' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+          </svg>
+        )}
+        {task.icon === 'database' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+            <path d="M3 12A9 3 0 0 0 21 12"></path>
+          </svg>
+        )}
+        {task.icon === 'flask-conical' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <path d="M10 2v7.31"></path>
+            <path d="M14 9.3V1.99"></path>
+            <path d="M8.5 2h7"></path>
+            <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+            <path d="M5.52 16h12.96"></path>
+          </svg>
+        )}
+
+        <h3 class="relative z-[2] mt-4 text-lg font-bold text-white">{task.title}</h3>
+
+        <ul class="relative z-[2] mt-3 flex flex-col gap-2">
+          {task.bullets.map((bullet) => (
+            <li class="flex gap-2 text-[13px] leading-snug text-white/75">
+              <span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-white/50"></span>
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

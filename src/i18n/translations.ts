@@ -93,14 +93,14 @@ export const translations = {
           bullets: [
             'Frontend-Komponenten entworfen und umgesetzt',
             'Custom WebSocket-Bibliothek für den Browser entwickelt',
-            'UI-Design mit HTML, CSS und Tailwind umgesetzt',
+            'Mit UI/UX-Designern am Interface zusammengearbeitet',
           ],
         },
         {
           title: 'Backend-Entwicklung',
           bullets: [
             'REST-API-Endpunkte implementiert',
-            'Datenmigrations-Skripte geschrieben',
+            'Backend-Service-Architektur entworfen und weiterentwickelt',
             'WebSocket-Server-Bibliothek entwickelt',
           ],
         },
@@ -108,8 +108,8 @@ export const translations = {
           title: 'Sicherheit',
           bullets: [
             'Middleware-Sicherheitsfunktionen für die API implementiert',
-            'Authentifizierungs-Flows konzipiert und umgesetzt',
-            'Sicherheitsrelevante Code-Reviews durchgeführt',
+            'OAuth-Authentifizierung umgesetzt (Google und Apple)',
+            'SAML SSO für Enterprise-Kunden integriert',
           ],
         },
         {
@@ -117,7 +117,7 @@ export const translations = {
           bullets: [
             'SQL-Abfragen für Produkt-Features geschrieben',
             'Schema- und Tabellenänderungen mit dem CTO koordiniert',
-            'Abfragen optimiert und Materialized Views eingeführt',
+            'Abfragen optimiert und mit Materialized Views gearbeitet',
           ],
         },
         {
@@ -126,6 +126,14 @@ export const translations = {
             'Eng mit Manual-QA-Ingenieuren zusammengearbeitet',
             'CI/CD-Pipelines für die Releaseverwaltung ausgelöst',
             'Releases in einem agilen Umfeld koordiniert',
+          ],
+        },
+        {
+          title: 'KI',
+          bullets: [
+            'KI-Tools (z. B. Cursor) für die tägliche Entwicklung eingesetzt',
+            'KI-Zugriff pro Workspace abgesichert',
+            'Webhook-Event-Parameter für KI-Integrationen abgesichert',
           ],
         },
       ],
@@ -303,14 +311,14 @@ export const translations = {
           bullets: [
             'Designed and built frontend components',
             'Built a custom WebSocket library for the browser',
-            'Implemented UI design with HTML, CSS and Tailwind',
+            'Collaborated with UI/UX designers on the interface',
           ],
         },
         {
           title: 'Backend Development',
           bullets: [
             'Implemented REST API endpoints',
-            'Wrote data migration scripts',
+            'Designed and evolved backend service architecture',
             'Built a WebSocket server library',
           ],
         },
@@ -318,8 +326,8 @@ export const translations = {
           title: 'Security',
           bullets: [
             'Implemented middleware security features for the API',
-            'Designed and implemented authentication flows',
-            'Conducted security-focused code reviews',
+            'Implemented OAuth authentication (Google and Apple)',
+            'Integrated SAML SSO for enterprise clients',
           ],
         },
         {
@@ -327,7 +335,7 @@ export const translations = {
           bullets: [
             'Wrote SQL queries for product features',
             'Coordinated schema and table changes with the CTO',
-            'Optimized queries and introduced materialized views',
+            'Optimized queries and worked with materialized views',
           ],
         },
         {
@@ -336,6 +344,14 @@ export const translations = {
             'Worked closely with manual QA engineers',
             'Triggered CI/CD pipelines for release management',
             'Coordinated releases in an agile environment',
+          ],
+        },
+        {
+          title: 'AI',
+          bullets: [
+            'Used AI tools (e.g. Cursor) to accelerate day-to-day development',
+            'Secured AI access on a per-workspace basis',
+            'Hardened webhook event parameters for AI-related integrations',
           ],
         },
       ],

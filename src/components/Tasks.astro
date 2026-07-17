@@ -9,7 +9,7 @@ const { translation } = Astro.props;
 const t = translation.tasks;
 
 // Icon-Reihenfolge ist fix und entspricht 1:1 der Reihenfolge in t.items.
-const icons = ['monitor', 'server', 'shield', 'database', 'flask-conical'] as const;
+const icons = ['monitor', 'server', 'shield', 'database', 'flask-conical', 'sparkles'] as const;
 const tasks = t.items.map((item, i) => ({ ...item, icon: icons[i] }));
 
 // Identisch zur Impact-Kachel, aber taller + top-aligned für Icon/Titel/Bullets.
@@ -33,10 +33,10 @@ const icon_stroke = { fill: 'none', stroke: 'currentColor', 'stroke-width': '1.5
     </p>
   </div>
 
-  <!-- Cards · 2-Spalten Desktop (letzte zentriert) / 1 Spalte Mobile -->
+  <!-- Cards · 2-Spalten Desktop / 1 Spalte Mobile -->
   <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
-    {tasks.map((task, i) => (
-      <div class={`${tile_class} ${i === 4 ? 'sm:col-span-2 sm:mx-auto sm:max-w-sm' : ''}`}>
+    {tasks.map((task) => (
+      <div class={tile_class}>
 
         {task.icon === 'monitor' && (
           <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
@@ -72,6 +72,15 @@ const icon_stroke = { fill: 'none', stroke: 'currentColor', 'stroke-width': '1.5
             <path d="M8.5 2h7"></path>
             <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
             <path d="M5.52 16h12.96"></path>
+          </svg>
+        )}
+        {task.icon === 'sparkles' && (
+          <svg viewBox="0 0 24 24" class={icon_class} {...icon_stroke}>
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+            <path d="M20 3v4"></path>
+            <path d="M22 5h-4"></path>
+            <path d="M4 17v2"></path>
+            <path d="M5 18H3"></path>
           </svg>
         )}
 

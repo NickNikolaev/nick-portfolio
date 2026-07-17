@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "ingest:kb": "node scripts/ingest-kb.js",
+    "query:kb": "node scripts/query-kb.js",
+    "chat:kb": "node scripts/chat-kb.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,9 @@
     "vitest": "^4.1.9"
   },
   "dependencies": {
-    "@vercel/analytics": "^2.0.1"
+    "@pinecone-database/pinecone": "^8.0.0",
+    "@vercel/analytics": "^2.0.1",
+    "gray-matter": "^4.0.3",
+    "openai": "^6.48.0"
   }
 }

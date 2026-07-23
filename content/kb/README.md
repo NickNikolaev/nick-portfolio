@@ -13,7 +13,7 @@ Markdown source for future semantic search / RAG (Pinecone).
 
 ```
 content/kb/
-  de/ … profile, experience, skills, work-alignment, tasks-alignment, ai-workflow, faq, mission
+  de/ … profile, experience, skills, work-alignment, tasks-alignment, faq, mission
   en/ … same filenames
 ```
 

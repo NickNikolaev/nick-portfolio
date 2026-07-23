@@ -95,9 +95,9 @@ Umsetzung: `Tasks.astro`, eingebunden in `Home.astro` an der Stelle von `<Impact
 | `id` | `tasks` |
 | Nav-Link | `/#tasks` |
 | Komponente | `Tasks.astro` |
-| Platzierung | ersetzt `<Impact />` — zwischen `<Work />` und `<AiWorkflow />` |
+| Platzierung | ersetzt `<Impact />` — zwischen `<Work />` und `<Faq />` |
 | Sektionslabel | `04 — Aufgaben` |
-| FAQ-Label | bleibt `05 — FAQ` |
+| FAQ-Label | `05 — FAQ` |
 
 ---
 

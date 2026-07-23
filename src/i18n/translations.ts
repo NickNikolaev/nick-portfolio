@@ -11,7 +11,6 @@ export const translations = {
       experience: 'Erfahrung',
       work: 'Arbeit',
       tasks: 'Aufgaben',
-      ai_workflow: 'KI-Workflow',
       faq: 'FAQ',
     },
     hero: {
@@ -138,54 +137,8 @@ export const translations = {
         },
       ],
     },
-    ai_workflow: {
-      label: '05 — KI-Workflow',
-      heading: 'Wie ich KI in der Entwicklung einsetze',
-      subtitle:
-        'Strukturierter Prozess — von der Spec bis zum Commit — mit Claude Code und Cursor.',
-      optional_badge: 'Optional',
-      why_label: 'Warum:',
-      steps: [
-        {
-          title: 'Spec zuerst',
-          description:
-            'Cursor generiert die Spec-Datei 01-feature.md mit User Stories (Given/When/Then), Acceptance Criteria, Tech Stack und Constraints.',
-          why: 'Eine KI ohne klare Spec löst das falsche Problem.',
-        },
-        {
-          title: 'Design Handoff + Iteration',
-          description:
-            'Claude Design generiert eine Visualisierung basierend auf requirements.md. Nach abgeschlossener Iteration wird der Handoff-Ordner exportiert.',
-          why: 'Eine einzige Quelldatei verhindert, dass Spec und Design auseinanderlaufen.',
-        },
-        {
-          title: 'Tests vor Code',
-          description:
-            'Claude Code generiert eine komplette Test-Suite (Unit / Component / E2E) inklusive Edge Cases. Alle Tests schlagen fehl — das ist korrekt.',
-          why: 'Tests definieren «done». Ohne Tests passt die KI den Code an — nicht das Problem.',
-        },
-        {
-          title: 'Code-Generierung',
-          description:
-            'Claude Code (Agent Mode) implementiert die Lösung gegen die bestehende Test-Suite. Der Prompt enthält: «Ändere die Tests nicht, um sie zu bestehen.»',
-          why: 'Dieser eine Satz verhindert, dass die KI sich selbst betrügt.',
-        },
-        {
-          title: 'Abnahme via Slash Command',
-          description:
-            'Claude Code führt /verify docs/specs/YYYY/MM/01-feature.md aus — prüft, ob alle User Stories abgedeckt und die CONSTITUTION.md-Regeln eingehalten sind.',
-          why: 'Grüne Tests ≠ vollständige Lösung.',
-        },
-        {
-          title: 'Commit & GitHub Push',
-          description:
-            'Commit im Conventional-Commits-Format, Push zu GitHub, CI/CD läuft automatisch durch.',
-          why: 'Nachvollziehbarkeit ist Professionalität.',
-        },
-      ],
-    },
     faq: {
-      label: '06 — FAQ',
+      label: '05 — FAQ',
       heading: 'Häufige Fragen',
       items: [
         { question: 'Wann kannst du anfangen?', answer: 'Sofort verfügbar.' },
@@ -201,7 +154,7 @@ export const translations = {
       ],
     },
     mission: {
-      label: '07 — Mission',
+      label: '06 — Mission',
       subtitle: 'Warum habe ich dieses Portfolio aufgebaut.',
       statement:
         'Hilf Schweizer Startups dabei, meine Eignung als Softwareentwickler mithilfe eines KI-gestützten Portfolios einzuschätzen.',
@@ -229,7 +182,6 @@ export const translations = {
       experience: 'Experience',
       work: 'Work',
       tasks: 'Tasks',
-      ai_workflow: 'AI Workflow',
       faq: 'FAQ',
     },
     hero: {
@@ -356,54 +308,8 @@ export const translations = {
         },
       ],
     },
-    ai_workflow: {
-      label: '05 — AI Workflow',
-      heading: 'How I use AI in development',
-      subtitle:
-        'Structured process — from spec to commit — with Claude Code and Cursor.',
-      optional_badge: 'Optional',
-      why_label: 'Why:',
-      steps: [
-        {
-          title: 'Spec first',
-          description:
-            'Cursor generates the spec file 01-feature.md with user stories (Given/When/Then), acceptance criteria, tech stack and constraints.',
-          why: 'An AI without a clear spec solves the wrong problem.',
-        },
-        {
-          title: 'Design Handoff + Iteration',
-          description:
-            'Claude Design generates a visualization based on requirements.md. Once the iteration is complete, the handoff folder is exported.',
-          why: 'A single source file keeps spec and design from drifting apart.',
-        },
-        {
-          title: 'Tests before code',
-          description:
-            'Claude Code generates a complete test suite (unit / component / E2E) including edge cases. All tests fail — that is correct.',
-          why: 'Tests define "done". Without tests the AI adapts the code — not the problem.',
-        },
-        {
-          title: 'Code generation',
-          description:
-            'Claude Code (Agent Mode) implements the solution against the existing test suite. The prompt includes: "Do not change the tests to make them pass."',
-          why: 'That single sentence stops the AI from cheating itself.',
-        },
-        {
-          title: 'Acceptance via slash command',
-          description:
-            'Claude Code runs /verify docs/specs/YYYY/MM/01-feature.md — checking that all user stories are covered and the CONSTITUTION.md rules are followed.',
-          why: 'Green tests ≠ complete solution.',
-        },
-        {
-          title: 'Commit & GitHub push',
-          description:
-            'Commit in Conventional Commits format, push to GitHub, CI/CD runs automatically.',
-          why: 'Traceability is professionalism.',
-        },
-      ],
-    },
     faq: {
-      label: '06 — FAQ',
+      label: '05 — FAQ',
       heading: 'Frequently Asked Questions',
       items: [
         { question: 'When can you start?', answer: 'Available immediately.' },
@@ -419,7 +325,7 @@ export const translations = {
       ],
     },
     mission: {
-      label: '07 — Mission',
+      label: '06 — Mission',
       subtitle: 'Why I built this portfolio.',
       statement:
         'Help Swiss startups assess my fit as a software engineer through an AI-powered portfolio.',
